@@ -1,8 +1,10 @@
 import React from "react";
 import {connect} from 'react-redux';
 import currentWeekNumber from'current-week-number';
-
-const functionChange = (files)=>{
+import addData from '../actions/addDataAction';
+import addFile from "../actions/addFileActions";
+;
+const functionChange = (files , addData)=>{
 
     let OTIF = []
     let OPEN = []
@@ -59,22 +61,28 @@ const functionChange = (files)=>{
     });
 
     // .slice(0,10).split('.').join('/')
-    console.log(OTIF)
-    console.log(OPEN)
+    // console.log(OTIF)
+    // console.log(OPEN)
+
+    addData( OTIF , OPEN);
 }
 
-const reportValidationFunction = ({files})=>{
+const reportValidationFunction = ({files , addData})=>{
    
 
     return(
-       <button onClick={()=>{functionChange(files)}}>ChangeFile</button>
+       <button onClick={()=>{functionChange(files , addData)}}>ChangeFile</button>
  
     )
 }
 
 
 const mapStateToProps = state =>({
-    files: state.addExcelFile // one file only
+    files: state.addExcelFile 
 })
 
-export default connect(mapStateToProps)(reportValidationFunction);;
+const mapDispatchToProps = dispatch => ({
+    addData : (OTIF , OPEN)=> dispatch(addData(OTIF , OPEN))
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(reportValidationFunction);;
