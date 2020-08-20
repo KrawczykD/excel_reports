@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import ReportValidationFunction from '../functions/reportValidationFunction'
+import ReportValidationFunction from './ReportValidationFunction'
 
 
 
