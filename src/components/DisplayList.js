@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import ReportValidationFunction from './ReportValidationFunction';
+import Table from './DisplayList.css';
 
 function preferedOrder(obj, order) {
         var newObject = {};
@@ -41,7 +42,7 @@ const DisplayList = ({OTIF, OPEN})=> {
     const generateTable = (report)=>{
         let headers = [];
         let tables = [];
-        let table = []
+        let table = [];
     
         for (const property in report.[0]) {
             headers.push(<th style={{textAlign:"left"}}>{property}</th>);
@@ -60,7 +61,7 @@ const DisplayList = ({OTIF, OPEN})=> {
           }
 
 
-          return({headers , tables })
+          return({headers , tables})
 
     }
 
@@ -69,20 +70,22 @@ const DisplayList = ({OTIF, OPEN})=> {
         return(
         <div>
             <ReportValidationFunction></ReportValidationFunction>
-            <table style={{width:"100%"}}>
+            {/* <table style={{width:"100%"}}> */}
+            <Table>
                 <caption>Weekly OTIF report</caption>
-                <tr>
-                    {generateTable(OTIF).headers}
-                </tr>
-                    {generateTable(OTIF).tables.map(item=><tr>{item}</tr>)}
-            </table>
-            <table style={{width:"100%"}}>
-                <caption>Weekly OPEN OTIF report</caption>
-                <tr>
-                    {generateTable(OPEN).headers}
-                </tr>
-                    {generateTable(OPEN).tables.map(item=><tr>{item}</tr>)}
-            </table>
+                    <tr>
+                        {generateTable(OTIF).headers}
+                    </tr>
+                        {generateTable(OTIF).tables.map(item=><tr>{item}</tr>)}
+            </Table>
+            <Table>
+                    <caption>Weekly OPEN OTIF report</caption>
+                    <tr>
+                        {generateTable(OPEN).headers}
+                    </tr>
+                        {generateTable(OPEN).tables.map(item=><tr>{item}</tr>)}
+            </Table>
+            {/* </table> */}
         </div>
         )
     

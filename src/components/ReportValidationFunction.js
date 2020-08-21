@@ -86,7 +86,7 @@ const reportValidationFunction = ({files , addData})=>{
    
 
     return(
-       <button onClick={()=>{functionChange(files , addData)}}>ChangeFile</button>
+       <button onClick={()=>{functionChange(files , addData)}}>Generate report</button>
  
     )
 }

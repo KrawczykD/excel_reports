@@ -75,7 +75,7 @@ class ExcelLoad extends Component {
   render() {
     return (
         <div>
-            <label htmlFor="file">Upload an excel to Process Triggers</label>
+            <label htmlFor="file">Upload an excel files</label>
             <br />
             <input type="file" className="form-control" id="file" accept={SheetJSFT} onChange={this.handleChange}/>
             <select name="report" id="report" onChange={this.handleReportChange}>
@@ -83,8 +83,8 @@ class ExcelLoad extends Component {
               <option value="OTIF">OTIF</option>
               <option value="OPEN_OTIF">OPEN OTIF</option>
             </select>
-            <br />
-            <input type='submit' value="Process Triggers" onClick={this.handleFile} />
+            
+            <input type='submit' value="Load File" onClick={this.handleFile} />
         </div>
       
     )
