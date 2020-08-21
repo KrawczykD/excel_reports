@@ -2,7 +2,6 @@ import React from "react";
 import {connect} from 'react-redux';
 import currentWeekNumber from'current-week-number';
 import addData from '../actions/addDataAction';
-import addFile from "../actions/addFileActions";
 ;
 const functionChange = (files , addData)=>{
 

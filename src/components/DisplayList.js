@@ -6,33 +6,55 @@ import ReportValidationFunction from './ReportValidationFunction';
 
 
 
-const DisplayList = ({OTIF , OPEN})=> {
+const DisplayList = ({OTIF, OPEN})=> {
 
-    console.log(OTIF)
     // headers.push(`${property}: ${OTIF.[0][property]}`));
 
-    let headers = [];
-    let items = [];
+    const generateTable = (report)=>{
+        let headers = [];
+        let tables = [];
+        let table = []
     
-        for (const property in OTIF.[0]) {
-            headers.push(<li style={{display: "inline-block" , width: "5%" , fontSize: "7px" }}>{property}</li>);
+        for (const property in report.[0]) {
+            headers.push(<th>{property}</th>);
           }
-          for(let i = 0 ; i <OTIF.length ; i++){
-            for (const property in OTIF.[i]) {
-                items.push(<li style={{display: "inline-block" , width: "5%" , fontSize: "7px"}}>{OTIF.[i][property]}</li>);
+
+        //   console.log(OTIF.length)
+
+
+          for(let i = 0 ; i < report.length ; i++){
+            for (const property in report[i]) {
+                // console.log(OTIF[i])
+                table.push(<td>{report.[i][property]}</td>);
               }
+              tables.push(table);
+              table = [];
           }
-    
-    
+
+
+          return({headers , tables })
+
+    }
 
     
+        
         return(
         <div>
             <ReportValidationFunction></ReportValidationFunction>
-            <ul>
-                {headers}
-                {items}
-            </ul>
+            <table style={{width:"100%"}}>
+                <caption>Weekly OTIF report</caption>
+                <tr>
+                    {generateTable(OTIF).headers}
+                </tr>
+                    {generateTable(OTIF).tables.map(item=><tr>{item}</tr>)}
+            </table>
+            <table style={{width:"100%"}}>
+                <caption>Weekly OPEN OTIF report</caption>
+                <tr>
+                    {generateTable(OPEN).headers}
+                </tr>
+                    {generateTable(OPEN).tables.map(item=><tr>{item}</tr>)}
+            </table>
         </div>
         )
     
@@ -44,21 +66,3 @@ const mapStateToProps = state =>({
 })
 
 export default connect(mapStateToProps)(DisplayList);
-
-
-
-// Billed Quantity
-// Country ship-to-party
-// Customer
-// Deliv.date last confirm.
-// Description
-// Item (SD)
-// Item category
-// Material
-// Purchase order no.
-// SD Billing Doc. created
-// SD Quantity
-// Sales Doc. created
-// Sales Document
-// Ship-to Pur. Order 
-// Sold-to party name
