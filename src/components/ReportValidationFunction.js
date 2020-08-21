@@ -33,7 +33,7 @@ const functionChange = (files , addData)=>{
     // OTIF = OTIF.map(item=>console.log(item["Material"]))
     // OPEN = OPEN.map(item=>item)
 
-    OTIF.map(item=> {
+    OTIF.map( item => {
         return(
             item.report = "OTIF",
             item.Product = item["Material"].slice(0,4),
@@ -43,9 +43,17 @@ const functionChange = (files , addData)=>{
             item["Sales Doc. created"] = excelData(item["Sales Doc. created"]),
             item["Deliv.date last confirm."] = excelData(item["Deliv.date last confirm."]),
             item["Ship-to Pur. Order Date"] = excelData(item["Ship-to Pur. Order Date"]),
-            item["SO + Line"] = `${item["Sales Document"]}${item["Item (SD)"]}`
+            item["SO + Line"] = `${item["Sales Document"]}${item["Item (SD)"]}`,
+
+            item["OTIF to Original 1st commit"] = `null`,
+            item["1st Commit - Late Category"] = `null`,
+            item["Comments (Landis)"] = `null`
+
         )
     });
+
+    console.log(OTIF)
+
 
     OPEN.map(item=> {
         return(
@@ -55,13 +63,21 @@ const functionChange = (files , addData)=>{
 
             item["Deliv.date last confirm."] = excelData(item["Deliv.date last confirm."]),
             item["Ship-to Pur. Order Date"] = excelData(item["Ship-to Pur. Order Date"]),
-            item["SO + Line"] = `${item["Sales Document"]}${item["Item (SD)"]}`
+            item["SO + Line"] = `${item["Sales Document"]}${item["Item (SD)"]}`,
+
+            item["OTIF to Original 1st commit"] = `null`,
+            item["1st Commit - Late Category"] = `null`,
+            item["Comments (Landis)"] = `null`
         )
     });
 
     // .slice(0,10).split('.').join('/')
     // console.log(OTIF)
     // console.log(OPEN)
+
+    
+    console.log(OTIF)
+
 
     addData( OTIF , OPEN);
 }

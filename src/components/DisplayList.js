@@ -2,11 +2,39 @@ import React from 'react';
 import {connect} from 'react-redux';
 import ReportValidationFunction from './ReportValidationFunction';
 
+function preferedOrder(obj, order) {
+        var newObject = {};
+        for(var i = 0; i < order.length; i++) {
+            if(obj.hasOwnProperty(order[i])) {
+                newObject[order[i]] = obj[order[i]];
+            }
+        }
+        return newObject;
+        }
+    
+        const preferredOrderSetup = [
+            "SO + Line",
+            "WW-YYYY",
+            "Product",
+            "Sales Document",
+            "Item (SD)",
+            "Sold-to party name",
+            "SD Quantity",
+            "Billed Quantity",
+            "Deliv.date last confirm.",
+            "OTIF to Original 1st commit",
+            "1st Commit - Late Category",
+            "Comments (Landis)"
+        ];
+
 
 
 
 
 const DisplayList = ({OTIF, OPEN})=> {
+
+    OTIF = OTIF.map(item=> preferedOrder(item,preferredOrderSetup))
+    OPEN = OPEN.map(item=> preferedOrder(item,preferredOrderSetup))
 
     // headers.push(`${property}: ${OTIF.[0][property]}`));
 
@@ -16,7 +44,7 @@ const DisplayList = ({OTIF, OPEN})=> {
         let table = []
     
         for (const property in report.[0]) {
-            headers.push(<th>{property}</th>);
+            headers.push(<th style={{textAlign:"left"}}>{property}</th>);
           }
 
         //   console.log(OTIF.length)
