@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import ReportValidationFunction from './ReportValidationFunction';
 import Table from './DisplayList.css';
+import Button from './DownloadExcelButton';
+
 
 function preferedOrder(obj, order) {
         var newObject = {};
@@ -37,7 +39,6 @@ const DisplayList = ({OTIF, OPEN})=> {
     OTIF = OTIF.map(item=> preferedOrder(item,preferredOrderSetup))
     OPEN = OPEN.map(item=> preferedOrder(item,preferredOrderSetup))
 
-    // headers.push(`${property}: ${OTIF.[0][property]}`));
 
     const generateTable = (report)=>{
         let headers = [];
@@ -48,12 +49,11 @@ const DisplayList = ({OTIF, OPEN})=> {
             headers.push(<th style={{textAlign:"left"}}>{property}</th>);
           }
 
-        //   console.log(OTIF.length)
+
 
 
           for(let i = 0 ; i < report.length ; i++){
             for (const property in report[i]) {
-                // console.log(OTIF[i])
                 table.push(<td>{report.[i][property]}</td>);
               }
               tables.push(table);
@@ -66,26 +66,55 @@ const DisplayList = ({OTIF, OPEN})=> {
     }
 
     
-        
+
+    const noDuplicate = ()=>{
+        const compareName = (obj1, obj2)=>{
+            return (obj1.["SO + Line"] === obj2.["SO + Line"]);
+          }
+          
+          
+          let output = OPEN.filter(b=>{
+            let indexFound = OTIF.findIndex(a => compareName(a, b));
+            return indexFound === -1;
+          })   
+
+          return output;
+    }
+            
         return(
         <div>
+      
             <ReportValidationFunction></ReportValidationFunction>
-            {/* <table style={{width:"100%"}}> */}
             <Table>
                 <caption>Weekly OTIF report</caption>
+                <tbody>
                     <tr>
                         {generateTable(OTIF).headers}
                     </tr>
-                        {generateTable(OTIF).tables.map(item=><tr>{item}</tr>)}
+                        {generateTable(OTIF).tables.map((item , index)=><tr key={index}>{item}</tr>)}
+                </tbody>
             </Table>
+            <Button report={OTIF} name="OTIF"></Button>
             <Table>
                     <caption>Weekly OPEN OTIF report</caption>
-                    <tr>
-                        {generateTable(OPEN).headers}
-                    </tr>
-                        {generateTable(OPEN).tables.map(item=><tr>{item}</tr>)}
+                    <tbody>
+                        <tr>
+                            {generateTable(OPEN).headers}
+                        </tr>
+                            {generateTable(OPEN).tables.map((item , index)=><tr key={index}>{item}</tr>)}
+                    </tbody>
             </Table>
-            {/* </table> */}
+            <Button report={OPEN} name="OPEN OTIF"></Button>
+            <Table>
+                    <caption>OPEN OTIF removed duplicates from OTIF</caption>
+                    <tbody>
+                        <tr>
+                            {generateTable(noDuplicate()).headers}
+                        </tr>
+                            {generateTable(noDuplicate()).tables.map((item , index)=><tr key={index}>{item}</tr>)}
+                    </tbody>
+            </Table>
+            <Button report={OPEN} name="OPEN OTIF REMOVED DUPLICATES"></Button>
         </div>
         )
     

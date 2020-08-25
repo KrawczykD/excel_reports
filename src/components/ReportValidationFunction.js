@@ -30,8 +30,7 @@ const functionChange = (files , addData)=>{
     OTIF = OTIF.filter(item => item !== "OTIF" ? item : null )
     OPEN = OPEN.filter(item => item !== "OPEN_OTIF" ? item : null )
 
-    // OTIF = OTIF.map(item=>console.log(item["Material"]))
-    // OPEN = OPEN.map(item=>item)
+  
 
     OTIF.map( item => {
         return(
@@ -47,12 +46,12 @@ const functionChange = (files , addData)=>{
 
             item["OTIF to Original 1st commit"] = `null`,
             item["1st Commit - Late Category"] = `null`,
-            item["Comments (Landis)"] = `null`
-
+            item["Comments (Landis)"] = `null`,
+            console.log(OTIF)
         )
     });
 
-    console.log(OTIF)
+
 
 
     OPEN.map(item=> {
@@ -71,13 +70,7 @@ const functionChange = (files , addData)=>{
         )
     });
 
-    // .slice(0,10).split('.').join('/')
-    // console.log(OTIF)
-    // console.log(OPEN)
-
-    
-    console.log(OTIF)
-
+  
 
     addData( OTIF , OPEN);
 }

@@ -83,7 +83,6 @@ class ExcelLoad extends Component {
               <option value="OTIF">OTIF</option>
               <option value="OPEN_OTIF">OPEN OTIF</option>
             </select>
-            
             <input type='submit' value="Load File" onClick={this.handleFile} />
         </div>
       
