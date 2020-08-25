@@ -2,8 +2,28 @@ import styled from 'styled-components';
 
 const Table = styled.table`
 
-width: 100%;
+min-width: 1;
 border: 2px solid black;
+
+& > tbody {
+  display: block;
+  max-height: 20vh;
+  overflow-y: scroll;
+}
+
+& > thead {
+  display: table;
+  width: 99%;
+  table-layout: fixed;
+}
+
+
+& > tbody > tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
 
 & > caption {
     background-color:#7AB800;
@@ -12,14 +32,18 @@ border: 2px solid black;
     font-size: 30px;
 }
 
-& > tr > td {
-  text-align: left;
+& > thead > tr > th {
   padding: 2px;
-  vertical-align: top;
-  border-top: 0;
-  border: 1px solid black;
+  border-bottom: 1px solid black;
+  width:100%;
 }
 
-    `
 
-export default Table
+& > tbody >tr > td {
+  padding: 2px;
+  border-bottom: 1px solid black;
+}
+
+`
+
+export default Table;

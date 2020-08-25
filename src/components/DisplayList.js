@@ -83,38 +83,45 @@ const DisplayList = ({OTIF, OPEN})=> {
             
         return(
         <div>
-      
-            <ReportValidationFunction></ReportValidationFunction>
             <Table>
                 <caption>Weekly OTIF report</caption>
-                <tbody>
+                <thead>
                     <tr>
                         {generateTable(OTIF).headers}
                     </tr>
+                </thead>
+                <tbody>
                         {generateTable(OTIF).tables.map((item , index)=><tr key={index}>{item}</tr>)}
                 </tbody>
             </Table>
             <Button report={OTIF} name="OTIF"></Button>
             <Table>
                     <caption>Weekly OPEN OTIF report</caption>
-                    <tbody>
+                    <thead>
                         <tr>
                             {generateTable(OPEN).headers}
                         </tr>
+                    </thead>
+                    <tbody>
                             {generateTable(OPEN).tables.map((item , index)=><tr key={index}>{item}</tr>)}
                     </tbody>
             </Table>
             <Button report={OPEN} name="OPEN OTIF"></Button>
             <Table>
                     <caption>OPEN OTIF removed duplicates from OTIF</caption>
-                    <tbody>
+                    <thead>
                         <tr>
                             {generateTable(noDuplicate()).headers}
                         </tr>
+                    </thead>
+                    <tbody>
                             {generateTable(noDuplicate()).tables.map((item , index)=><tr key={index}>{item}</tr>)}
                     </tbody>
             </Table>
             <Button report={OPEN} name="OPEN OTIF REMOVED DUPLICATES"></Button>
+            <br/>
+            <br/>
+            <ReportValidationFunction></ReportValidationFunction>
         </div>
         )
     
