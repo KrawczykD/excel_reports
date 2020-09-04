@@ -7,11 +7,13 @@ border: 2px solid black;
 
 & > tbody {
   display: block;
-  max-height: 20vh;
+  height:17vh;
+  max-height:17vh;
   overflow-y: scroll;
 }
 
 & > thead {
+  height:2vh;
   display: table;
   width: 99%;
   table-layout: fixed;
@@ -42,6 +44,7 @@ border: 2px solid black;
 & > tbody >tr > td {
   padding: 2px;
   border-bottom: 1px solid black;
+
 }
 
 `

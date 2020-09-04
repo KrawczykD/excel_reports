@@ -1,5 +1,6 @@
 import React from "react";
 import exportFromJSON from 'export-from-json';
+import Buttons from './Button.css.js'
 
 const Button = ({report , name}) =>{
 
@@ -12,7 +13,9 @@ const Button = ({report , name}) =>{
         exportFromJSON({ data, fileName, exportType })
 }
     return(
-        <button onClick={()=>{handleDownloadExcel(report)}}>Download CSV File</button>
+        <>
+            <Buttons onClick={()=>{handleDownloadExcel(report)}}>Download CSV File</Buttons>
+        </>
     )
 }
 

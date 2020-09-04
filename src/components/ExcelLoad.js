@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import XLSX from 'xlsx';
 import {connect} from 'react-redux';
 import addFile from '../actions/addFileActions';
+import {Input , Label} from './Input.css.js';
+import Select from './Select.css.js';
 
 const SheetJSFT = [
 	"xlsx", "xlsb", "xlsm", "xls", "xml", "csv", "txt", "ods", "fods", "uos", "sylk", "dif", "dbf", "prn", "qpw", "123", "wb*", "wq*", "html", "htm"
@@ -12,6 +14,8 @@ export const make_cols = refstr => {
 	for(var i = 0; i < C; ++i) o[i] = {name:XLSX.utils.encode_col(i), key:i}
 	return o;
 };
+
+export let state = null;
  
 class ExcelLoad extends Component {
   constructor(props) {
@@ -20,11 +24,20 @@ class ExcelLoad extends Component {
       file: {},
       data: [],
       cols: [],
-      report: null
+      report: null,
+      customer: null,
     }
+
+
+
     this.handleFile = this.handleFile.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
+
+  componentDidUpdate(){
+    state = this.state;
+  }
+  
  
   handleChange(e) {
     const files = e.target.files;
@@ -46,14 +59,16 @@ class ExcelLoad extends Component {
       const ws = wb.Sheets[wsname];
       /* Convert array of arrays */
       const data = XLSX.utils.sheet_to_json(ws);
-      /*Add to object report type*/
-      data.unshift(this.state.report)
+      // add customer and report type
+      data.map(item=> item["Report Customer"] = this.state.customer);
+      data.map(item=> item.report = this.state.report);
+      /*Add to object report type and customer*/
+      // data.unshift(this.state.report);
       /* Update state */
       this.setState({ data: data, cols: make_cols(ws['!ref']) }, () => {
         // console.log(JSON.stringify(this.state.data, null, 2));
         this.props.addFile(this.state.data)
       });
- 
     };
  
     if (rABS) {
@@ -65,9 +80,15 @@ class ExcelLoad extends Component {
 
 
   handleReportChange = (e)=>{
-    this.setState({
-      report: e.target.value
-    })
+    if(e.target.id === "report"){
+      this.setState({
+        report: e.target.value
+      })
+    } if(e.target.id === "customer"){
+      this.setState({
+        customer: e.target.value
+      })
+    }
   }
 
 
@@ -75,15 +96,25 @@ class ExcelLoad extends Component {
   render() {
     return (
         <div>
-            <label htmlFor="file">Upload an excel files</label>
-            <br />
-            <input type="file" className="form-control" id="file" accept={SheetJSFT} onChange={this.handleChange}/>
-            <select name="report" id="report" onChange={this.handleReportChange}>
-              <option value=""></option>
-              <option value="OTIF">OTIF</option>
-              <option value="OPEN_OTIF">OPEN OTIF</option>
-            </select>
-            <input type='submit' value="Load File" onClick={this.handleFile} />
+            <br></br>
+            <Label htmlFor="file">Upload an excel files</Label>
+            <Input type="file" className="form-control" id="file" accept={SheetJSFT} onChange={this.handleChange}/>
+            
+              <Select name="report" id="report" onChange={this.handleReportChange}>
+                <option value=""></option>
+                <option value="OTIF">OTIF</option>
+                <option value="OPEN_OTIF">OPEN OTIF</option>
+              </Select>
+            
+              <Select name="customer" id="customer" onChange={this.handleReportChange}>
+                <option value=""></option>
+                <option value="STK">STK</option>
+                <option value="CLS">CLS</option>
+                <option value="JBL">JBL</option>
+              </Select>
+            
+            <Label htmlFor="submit">Load File</Label>
+            <Input id="submit" type='submit' value="Load File" onClick={this.handleFile} />
         </div>
       
     )
@@ -93,6 +124,8 @@ class ExcelLoad extends Component {
 const mapDispatchToProps = (dispatch)=>({
     addFile : (data)=> dispatch(addFile(data))
 })
+
+
 
 
 export default connect(null,mapDispatchToProps)(ExcelLoad);
