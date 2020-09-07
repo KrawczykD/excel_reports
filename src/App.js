@@ -14,8 +14,7 @@ function App() {
       <Normalize/>
       <ExcelLoads></ExcelLoads>
       <DisplayList></DisplayList>
-      <MacroDownload></MacroDownload>
-      <Footer></Footer>
+      <Footer><MacroDownload></MacroDownload></Footer>
     </div>
   );
 }

@@ -9,21 +9,79 @@ import ExcelDownloadSeparateButton from './ExcelDownloadSeparateButton';
 
 const DisplayList = ({OTIF, OPEN})=> {
 
+
     const preferredOrderSetup = [
-        "SO + Line",
+        // 1st Commit - Late Category
+        // Billed Quantity
+        // Billing Date
+        // Comments (Landis)
+        // Country sold-to-party
+        // Customer
+        // Deliv.date last confirm.
+        // Description
+        // Item (SD)
+        // Item category
+        // Material
+        // OTIF to Original 1st commit
+        // Product
+        // Report Customer
+        // SD Billing Doc. created
+        // SD Quantity
+        // SO + Line
+        // Sales Doc. created
+        // Sales Document
+        // Ship-to Pur. Order Date
+        // Sold-to party name
+        // WW-YYYY
+        // report
+        /////////// STOCKPORT SETTING
+        // "WW-YYYY",
+        // "Sales Document",
+        // "SO + Line",
+        // "Material",
+        // "Description",
+        // "Country sold-to-party",
+        // "Customer",
+        // "Sold-to party name",
+        // "SD Quantity",
+        // "Billed Quantity",
+        // "Ship-to Pur. Order Date",
+        // "Deliv.date last confirm.",
+        // "Billing Date",
+        // "Report Customer",
+        // "Physical delivery date (CLS&JBL)",
+        // "OTIF to Original 1st commit",
+        // "1st Commit - Late Category",
+        // "Comments (Landis)",
+        // "OTIF V's Cust. Req.",
+        // "Late Category to Customer requested"
+
         "WW-YYYY",
-        "Product",
         "Sales Document",
-        "Item (SD)",
+        "SO + Line",
+        "Material",
+        "Description",
+        "Country ship-to-party",
+        "Customer",
         "Sold-to party name",
-        "SD Quantity",
-        "Billed Quantity",
-        "Deliv.date last confirm.",
-        "OTIF to Original 1st commit",
-        "1st Commit - Late Category",
-        "Comments (Landis)",
-        "Report Customer"
-    ];
+        "PO Quantity",
+        "PO Invoice Quantity",
+        "Ship-to Pur. Order Date",
+        "PO first commited delivery date",
+        "SD Billing Doc. created",
+        "Report Customer",
+        "Physical delivery date (CLS&JBL)",
+
+        "Physical delivery date",
+        "OTIF V's 1st Commit",
+        "Late Category to 1st Commit",
+        "Comments (all)",
+        "OTIF V's Cust. Req.",
+        "Late Category to Customer requested",
+        "report"
+
+
+    ];  
 
     const preferedOrder = (obj, order)=> {
         var newObject = {};
@@ -32,12 +90,14 @@ const DisplayList = ({OTIF, OPEN})=> {
                 newObject[order[i]] = obj[order[i]];
             }
         }
+    
         return newObject;
         }
 
 
     OTIF = OTIF.map(item=> preferedOrder(item,preferredOrderSetup))
     OPEN = OPEN.map(item=> preferedOrder(item,preferredOrderSetup))
+
 
     //here you can controll what field display
     
@@ -98,7 +158,7 @@ const DisplayList = ({OTIF, OPEN})=> {
         return(
         <div>
             <Table>
-                <caption>Weekly OTIF report</caption>
+                <caption><p>Weekly OTIF report</p><Button report={OTIF.map(item=> preferedOrder(item,preferredOrderSetup))} name="OTIF"></Button></caption>
                 <thead>
                     <tr>
                         {generateTable(OTIF).headers}
@@ -108,9 +168,8 @@ const DisplayList = ({OTIF, OPEN})=> {
                         {generateTable(OTIF).tables.map((item , index)=><tr key={index}>{item}</tr>)}
                 </tbody>
             </Table>
-            <Button report={OTIF.map(item=> preferedOrder(item,preferredOrderSetup))} name="OTIF"></Button>
             <Table>
-                    <caption>Weekly OPEN OTIF report</caption>
+                    <caption><p>Weekly OPEN OTIF report</p><Button report={OPEN.map(item=> preferedOrder(item,preferredOrderSetup))} name="OPEN"></Button></caption>
                     <thead>
                         <tr>
                             {generateTable(OPEN).headers}
@@ -122,10 +181,9 @@ const DisplayList = ({OTIF, OPEN})=> {
                             
                     </tbody>
             </Table>
-            <Button report={OPEN.map(item=> preferedOrder(item,preferredOrderSetup))} name="OPEN_OTIF"></Button>
             
             <Table>
-                    <caption>OPEN + OTIF duplicates red</caption>
+                    <caption><p>OPEN + OTIF duplicates red</p><Button report={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))} name="OPEN OTIF REMOVED DUPLICATES"></Button></caption>
                     <thead>
                         <tr>
                             {generateTable(noDuplicate(OPEN , OTIF)).headers}
@@ -135,12 +193,18 @@ const DisplayList = ({OTIF, OPEN})=> {
                             {generateTable(noDuplicate(OPEN , OTIF)).tables.map((item , index)=><tr key={index}>{item}</tr>)}
                     </tbody>
             </Table>
-            <Button report={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))} name="OPEN OTIF REMOVED DUPLICATES"></Button>
-            {/* cos tu */}
+            <ExcelDownloadSeparateButton name={"Celestica OPEN + OTIF"} report={null} customer={"CLS"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
+            <ExcelDownloadSeparateButton name={"JABIL OPEN + OTIF"} report={null} customer={"JBL"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
+            <ExcelDownloadSeparateButton name={"STOCKPORT OPEN + OTIF"} report={null} customer={"STK"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
+            <br></br>
+            <ExcelDownloadSeparateButton name={"Celestica OTIF"} customer={"CLS"} report={"OTIF"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
+            <ExcelDownloadSeparateButton name={"JABIL OTIF"} customer={"JBL"} report={"OTIF"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
+            <ExcelDownloadSeparateButton name={"STOCKPORT OTIF"} customer={"STK"} report={"OTIF"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
+            <br></br>
+            <ExcelDownloadSeparateButton name={"Celestica OPEN"} customer={"CLS"} report={"OPEN"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
+            <ExcelDownloadSeparateButton name={"JABIL OPEN"} customer={"JBL"} report={"OPEN"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
+            <ExcelDownloadSeparateButton name={"STOCKPORT OPEN"} customer={"STK"} report={"OPEN"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
             <ReportValidationFunction></ReportValidationFunction>
-            <ExcelDownloadSeparateButton name={"Celestica OPEN + OTIF"} customer={"CLS"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
-            <ExcelDownloadSeparateButton name={"JABIL OPEN + OTIF"} customer={"JBL"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
-            <ExcelDownloadSeparateButton name={"STOCKPORT OPEN + OTIF"} customer={"STK"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
         </div>
         )
     

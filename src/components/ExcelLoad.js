@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import XLSX from 'xlsx';
 import {connect} from 'react-redux';
 import addFile from '../actions/addFileActions';
+import changeWarningState from '../actions/changeWarningStateAction';
 import {Input , Label} from './Input.css.js';
 import Select from './Select.css.js';
 
@@ -91,6 +92,19 @@ class ExcelLoad extends Component {
     }
   }
 
+  checkReport = ()=>{
+    if(this.state.file.name.slice(0,8) === `${this.state.customer}_${this.state.report}`){
+      this.props.changeWarningState(false)
+      return(this.handleFile())
+    }
+
+    else{
+      this.props.changeWarningState(true)
+      return null;
+    }
+
+  }
+
 
  
   render() {
@@ -102,19 +116,19 @@ class ExcelLoad extends Component {
             
               <Select name="report" id="report" onChange={this.handleReportChange}>
                 <option value=""></option>
+                <option value="OPEN">OPEN</option>
                 <option value="OTIF">OTIF</option>
-                <option value="OPEN_OTIF">OPEN OTIF</option>
               </Select>
             
               <Select name="customer" id="customer" onChange={this.handleReportChange}>
                 <option value=""></option>
-                <option value="STK">STK</option>
                 <option value="CLS">CLS</option>
                 <option value="JBL">JBL</option>
+                <option value="STK">STK</option>
               </Select>
             
             <Label htmlFor="submit">Load File</Label>
-            <Input id="submit" type='submit' value="Load File" onClick={this.handleFile} />
+            <Input id="submit" type='submit' value="Load File" onClick={()=>{this.checkReport()}}/>
         </div>
       
     )
@@ -122,7 +136,8 @@ class ExcelLoad extends Component {
 }
 
 const mapDispatchToProps = (dispatch)=>({
-    addFile : (data)=> dispatch(addFile(data))
+    addFile : (data)=> dispatch(addFile(data)),
+    changeWarningState : (state)=>dispatch(changeWarningState(state))
 })
 
 

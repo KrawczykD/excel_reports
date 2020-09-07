@@ -8,6 +8,7 @@ const functionChange = (files , addData)=>{
     let OTIF = []
     let OPEN = []
 
+
     const excelData = (data)=>{
 
         if(typeof(data) === "string"){
@@ -41,8 +42,6 @@ const functionChange = (files , addData)=>{
     }
     // console.log(files); problem z pobieraniem ostatniej tabeli
     
-        
-
 
 
   
@@ -52,18 +51,36 @@ const functionChange = (files , addData)=>{
     OTIF.map( item => {
         return(
             // item.report = "OTIF",
+
+            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["Country sold-to-party"] = item["Country ship-to-party"] : null,
+            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["SD Quantity"] = item["PO Quantity"] : null,
+            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["Billed Quantity"] = item["PO Invoice Quantity"] : null,
+            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["Deliv.date last confirm."] = item["PO first commited delivery date"] : null,
+            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["Billing Date"] = item["SD Billing Doc. created"] : null,
+
+            item["Report Customer"] === "STK" ? item["Country ship-to-party"] = item["Country sold-to-party"] : null,
+            item["Report Customer"] === "STK" ? item["PO Quantity"] = item["SD Quantity"] : null,
+            item["Report Customer"] === "STK" ? item["PO Invoice Quantity"] = item["Billed Quantity"] : null,
+            item["Report Customer"] === "STK" ? item["PO first commited delivery date"] = item["Deliv.date last confirm."] : null,
+            item["Report Customer"] === "STK" ? item["SD Billing Doc. created"] = item["Billing Date"] : null,
+            
             item.Product = item["Material"].slice(0,4),
             item["WW-YYYY"] = `${currentWeekNumber()}-${new Date().getFullYear()}`,
 
             item["SD Billing Doc. created"] = excelData(item["SD Billing Doc. created"]),
+            item["Billing Date"] = excelData(item["Billing Date"]),
+            item["PO first commited delivery date"] = excelData(item["PO first commited delivery date"]),
             item["Sales Doc. created"] = excelData(item["Sales Doc. created"]),
             item["Deliv.date last confirm."] = excelData(item["Deliv.date last confirm."]),
             item["Ship-to Pur. Order Date"] = excelData(item["Ship-to Pur. Order Date"]),
             item["SO + Line"] = `${item["Sales Document"]}${item["Item (SD)"]}`,
 
-            item["OTIF to Original 1st commit"] = `null`,
-            item["1st Commit - Late Category"] = `null`,
-            item["Comments (Landis)"] = `null`
+            item["Physical delivery date (CLS&JBL)"] = `null`,
+            item["OTIF V's 1st Commit"] = `null`,
+            item["Late Category to 1st Commit"] = `null`,
+            item["Comments (all)"] = `null`,
+            item["OTIF V's Cust. Req."] = `null`,
+            item["Late Category to Customer requested"] = `null`
         )
     });
 
@@ -73,16 +90,35 @@ const functionChange = (files , addData)=>{
     OPEN.map(item=> {
         return(
             // item.report = "OPEN_OTIF",
+            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["Country sold-to-party"] = item["Country ship-to-party"] : null,
+            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["SD Quantity"] = item["PO Quantity"] : null,
+            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["Billed Quantity"] = item["PO Invoice Quantity"] : null,
+            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["Deliv.date last confirm."] = item["PO first commited delivery date"] : null,
+            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["Billing Date"] = item["SD Billing Doc. created"] : null,
+
+            item["Report Customer"] === "STK" ? item["Country ship-to-party"] = item["Country sold-to-party"] : null,
+            item["Report Customer"] === "STK" ? item["PO Quantity"] = item["SD Quantity"] : null,
+            item["Report Customer"] === "STK" ? item["PO Invoice Quantity"] = item["Billed Quantity"] : null,
+            item["Report Customer"] === "STK" ? item["PO first commited delivery date"] = item["Deliv.date last confirm."] : null,
+            item["Report Customer"] === "STK" ? item["SD Billing Doc. created"] = item["Billing Date"] : null,
+
             item.Product = item["Material"].slice(0,4),
             item["WW-YYYY"] = `${currentWeekNumber()}-${new Date().getFullYear()}`,
 
             item["Deliv.date last confirm."] = excelData(item["Deliv.date last confirm."]),
             item["Ship-to Pur. Order Date"] = excelData(item["Ship-to Pur. Order Date"]),
             item["SO + Line"] = `${item["Sales Document"]}${item["Item (SD)"]}`,
+            item["Billing Date"] = excelData(item["Billing Date"]),
+            item["SD Billing Doc. created"] = excelData(item["SD Billing Doc. created"]),
+            item["PO first commited delivery date"] = excelData(item["PO first commited delivery date"]),
 
-            item["OTIF to Original 1st commit"] = `null`,
-            item["1st Commit - Late Category"] = `null`,
-            item["Comments (Landis)"] = `null`
+            item["Physical delivery date (CLS&JBL)"] = `null`,
+            item["OTIF V's 1st Commit"] = `null`,
+            item["Late Category to 1st Commit"] = `null`,
+            item["Comments (all)"] = `null`,
+            item["OTIF V's Cust. Req."] = `null`,
+            item["Late Category to Customer requested"] = `null`
+
         )
     });
 
@@ -95,7 +131,7 @@ const reportValidationFunction = ({files , addData})=>{
 
     return(
         <>
-            <Buttons onClick={()=>{functionChange(files , addData)}}>Generate report</Buttons>
+            <Buttons style={{position:"absolute", bottom:"20px", right:"0"}} onClick={()=>{functionChange(files , addData)}}>Generate report</Buttons>
         </>
     )
 }

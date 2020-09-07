@@ -2,13 +2,27 @@ import React from "react";
 import exportFromJSON from 'export-from-json';
 import Buttons from './Button.css.js';
 
-const ExcelDownloadSeparateButton = ({customer , file , name})=>{
+const ExcelDownloadSeparateButton = ({customer , file , name , report})=>{
 
-    const separateCustomers = (dataFile)=> {
-        console.log(dataFile)
-        var data = dataFile.filter(item => item["Report Customer"] === customer ? item : null)
-        console.log(data)
-        return data;
+
+    const separateCustomers = (dataFile , ChoosenReport)=> {
+
+        var data;
+
+        switch(report) {
+            case "OTIF":
+                return data = dataFile.filter(item => item["Report Customer"] === customer && item["report"] === ChoosenReport ? item : null)
+
+            case "OPEN": 
+                return data = dataFile.filter(item => item["Report Customer"] === customer && item["report"] === ChoosenReport ? item : null)
+            
+            case null:
+                return data = dataFile.filter(item => item["Report Customer"] === customer ? item : null)
+
+            default:
+                return []
+        }
+
     };
 
 
@@ -16,9 +30,8 @@ const ExcelDownloadSeparateButton = ({customer , file , name})=>{
 
     const handleDownloadExcel = () =>{
         const date = new Date().toLocaleDateString();
-        const data = separateCustomers(file);
-        console.log(data)
-        const fileName = `${customer}_${date}`;
+        const data = separateCustomers(file , report);
+        const fileName = `${customer}_${report ? report : "COMBINED"}_${date}`;
         const exportType = 'csv';
 
         exportFromJSON({ data, fileName, exportType })
@@ -26,7 +39,7 @@ const ExcelDownloadSeparateButton = ({customer , file , name})=>{
 
     return(
         <>
-            <Buttons onClick={()=>{handleDownloadExcel()}}>{name}</Buttons>
+            <Buttons style={{width:"300px" , textAlign:"left"}} onClick={()=>{handleDownloadExcel()}}>{name}</Buttons>
         </>
     )
 }

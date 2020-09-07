@@ -3,7 +3,7 @@ import Excel from '../macro/macro.xlsm';
 
 const Macro = ()=>{
     return(
-        <a href={Excel} download="Macro.xlsm"> Download Here </a>
+        <a style={{paddingLeft:"20px"}} href={Excel} download="Macro.xlsm"> Download Macro Here </a>
     )
 }
 
