@@ -1,9 +1,13 @@
 import React from 'react'
-import Excel from '../macro/macro.xlsm';
+import excel from '../macro/macro.vbs';
+
+
+
+console.log(excel)
 
 const Macro = ()=>{
     return(
-        <a style={{paddingLeft:"20px"}} href={Excel} download="Macro.xlsm"> Download Macro Here </a>
+        <a style={{paddingLeft:"20px"}} href={excel} download="Macro.vbs"> Download Macro Here </a>
     )
 }
 
