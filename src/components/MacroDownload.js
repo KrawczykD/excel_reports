@@ -2,9 +2,14 @@ import React from 'react';
 import Button from './Button.css';
 import {DateInput as Input} from './Input.css';
 import {Div , Info} from './MacroDownload.css';
+import currentWeekNumber from'current-week-number';
 
 
 const Macro = (props)=>{
+
+let path = `"C:\\reports\\${currentWeekNumber()}"`
+
+
 
 
 // let startDate = `"${props.startDate}"`;
@@ -49,7 +54,7 @@ session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectAll
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").contextMenu
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectContextMenuItem "&XXL"
 session.findById("wnd[1]/tbar[0]/btn[0]").press
-session.findById("wnd[1]/usr/ctxtDY_PATH").text = "C:\\reports"
+session.findById("wnd[1]/usr/ctxtDY_PATH").text = ${path}
 session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = "STK_OPEN.XLSX"
 session.findById("wnd[1]/usr/ctxtDY_FILENAME").caretPosition = 13
 session.findById("wnd[1]/tbar[0]/btn[0]").press
@@ -62,7 +67,7 @@ session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectAll
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").contextMenu
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectContextMenuItem "&XXL"
 session.findById("wnd[1]/tbar[0]/btn[0]").press
-session.findById("wnd[1]/usr/ctxtDY_PATH").text = "C:\\reports"
+session.findById("wnd[1]/usr/ctxtDY_PATH").text = ${path}
 session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = "STK_OTIF.XLSX"
 session.findById("wnd[1]/usr/ctxtDY_FILENAME").caretPosition = 13
 session.findById("wnd[1]/tbar[0]/btn[0]").press
@@ -106,7 +111,7 @@ session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectAll
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").contextMenu
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectContextMenuItem "&XXL"
 session.findById("wnd[1]/tbar[0]/btn[0]").press
-session.findById("wnd[1]/usr/ctxtDY_PATH").text = "C:\\reports"
+session.findById("wnd[1]/usr/ctxtDY_PATH").text = ${path}
 session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = "JBL_OPEN.XLSX"
 session.findById("wnd[1]/usr/ctxtDY_FILENAME").caretPosition = 13
 session.findById("wnd[1]/tbar[0]/btn[0]").press
@@ -119,7 +124,7 @@ session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectAll
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").contextMenu
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectContextMenuItem "&XXL"
 session.findById("wnd[1]/tbar[0]/btn[0]").press
-session.findById("wnd[1]/usr/ctxtDY_PATH").text = "C:\\reports"
+session.findById("wnd[1]/usr/ctxtDY_PATH").text = ${path}
 session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = "JBL_OTIF.XLSX"
 session.findById("wnd[1]/usr/ctxtDY_FILENAME").caretPosition = 13
 session.findById("wnd[1]/tbar[0]/btn[0]").press
@@ -159,7 +164,7 @@ session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectAll
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").contextMenu
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectContextMenuItem "&XXL"
 session.findById("wnd[1]/tbar[0]/btn[0]").press
-session.findById("wnd[1]/usr/ctxtDY_PATH").text = "C:\\reports"
+session.findById("wnd[1]/usr/ctxtDY_PATH").text = ${path}
 session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = "CLS_OPEN.XLSX"
 session.findById("wnd[1]/usr/ctxtDY_FILENAME").caretPosition = 13
 session.findById("wnd[1]/tbar[0]/btn[0]").press
@@ -172,7 +177,7 @@ session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectAll
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").contextMenu
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectContextMenuItem "&XXL"
 session.findById("wnd[1]/tbar[0]/btn[0]").press
-session.findById("wnd[1]/usr/ctxtDY_PATH").text = "C:\\reports"
+session.findById("wnd[1]/usr/ctxtDY_PATH").text = ${path}
 session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = "CLS_OTIF.XLSX"
 session.findById("wnd[1]/usr/ctxtDY_FILENAME").caretPosition = 13
 session.findById("wnd[1]/tbar[0]/btn[0]").press
