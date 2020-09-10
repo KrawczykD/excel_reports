@@ -1,20 +1,26 @@
 import React from 'react';
+import changeWarningState from '../actions/changeWarningStateAction'
+import {connect} from 'react-redux';
+// import { state } from './ExcelLoad';
+import { Background , Paragraph , Close , Warning } from './Dialog.css.js';
 
 
-const Dialog = ()=>{
+const Dialog = ({changeWarningState , text})=>{
     return(
         <>
-            <div style={{position:"absolute", top:"0" , left:"0" , width:"100%" , height:"100vh", zIndex:"0" , opacity:"0.4" , backgroundColor:"#000000"}}></div>
-            <div style={{position:"absolute" , top:"50%" , left:"50%" ,  transform: "translate(-50%, -50%)" , width:"30%" , height:"40%" , backgroundColor:"white" , borderRadius:"10px"}}>
-                <p style={{position:"relative" , top:"0" , right:"-95%"}}>X</p>
-                <div class="warning">
-                    <p>
-                        You added wrong report sheet
-                    </p>
-                </div>
-            </div>
+            <Background></Background>
+            <Warning>
+                <Close onClick={()=>{changeWarningState(false)}}>X</Close>
+                    <Paragraph>
+                        {text}
+                    </Paragraph>
+            </Warning>
         </>
     )
 }
 
-export default Dialog;
+const mapDispatchToProps = (dispatch)=>({
+    changeWarningState : (state)=>dispatch(changeWarningState(state))
+})
+
+export default connect(null,mapDispatchToProps)(Dialog);

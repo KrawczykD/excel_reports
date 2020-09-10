@@ -19,12 +19,14 @@ const Table = styled.table`
 
               & > p {
                 display:inline;
+                letter-spacing:1px;
               }
 
               & > button {
                 position:absolute;
                 top:0;
                 right:0;
+                letter-spacing:1px;
               }
           }
 

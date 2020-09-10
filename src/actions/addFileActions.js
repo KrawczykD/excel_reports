@@ -2,7 +2,7 @@ const addFile = (data)=>{
     return(
         {   
             type:"ADD_FILE",
-            data:data
+            data:data,
         }
     )
 }

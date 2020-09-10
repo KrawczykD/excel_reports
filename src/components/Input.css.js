@@ -17,3 +17,11 @@ export const Label = styled.label`
         color:gray;
     }
 `
+
+export const DateInput = styled.input`
+    font-size: 20px;
+    border: 1px solid black;
+    padding: 3px 10px;
+    margin: 3px;
+    border-radius: 2px;
+`

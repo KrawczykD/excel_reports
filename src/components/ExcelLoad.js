@@ -93,9 +93,17 @@ class ExcelLoad extends Component {
   }
 
   checkReport = ()=>{
-    if(this.state.file.name.slice(0,8) === `${this.state.customer}_${this.state.report}`){
-      this.props.changeWarningState(false)
-      return(this.handleFile())
+
+    if(this.state.file.name !== undefined){
+      if(this.state.file.name.slice(0,8) === `${this.state.customer}_${this.state.report}`){
+        this.props.changeWarningState(false)
+        return(this.handleFile())
+      }
+  
+      else{
+        this.props.changeWarningState(true)
+        return null;
+      }
     }
 
     else{
@@ -137,7 +145,7 @@ class ExcelLoad extends Component {
 
 const mapDispatchToProps = (dispatch)=>({
     addFile : (data)=> dispatch(addFile(data)),
-    changeWarningState : (state)=>dispatch(changeWarningState(state))
+    changeWarningState : (state)=>dispatch(changeWarningState(state)),
 })
 
 
