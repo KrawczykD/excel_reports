@@ -28,36 +28,16 @@ const functionChange = (files , addData)=>{
 
 
 
-    // files.map(array=>array[0] === "OTIF" ? array.map(item=> OTIF.push(item)) : null)
-    // files.map(array=>array[0] === "OPEN_OTIF" ? array.map(item=> OPEN.push(item)) : null)
-
-   
-
-    // OTIF = OTIF.filter(item => item !== "OTIF" ? item : null )
-    // OPEN = OPEN.filter(item => item !== "OPEN_OTIF" ? item : null )
-
-    // files.map(array=>array[0] === "OPEN_OTIF" ? array.map(item=> OPEN.push(item)) : null)
+    
     for( let i = 0 ; i < files.length ; i++){
         files[i].map(item=> item.report === "OTIF" ? OTIF.push(item) : OPEN.push(item))
     }
-    // console.log(files); problem z pobieraniem ostatniej tabeli
+   
     
-
-
-  
-
-  
 
     OTIF.map( item => {
         return(
-            // item.report = "OTIF",
-
-            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["Country sold-to-party"] = item["Country ship-to-party"] : null,
-            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["SD Quantity"] = item["PO Quantity"] : null,
-            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["Billed Quantity"] = item["PO Invoice Quantity"] : null,
-            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["Deliv.date last confirm."] = item["PO first commited delivery date"] : null,
-            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["Billing Date"] = item["SD Billing Doc. created"] : null,
-
+            
             item["Report Customer"] === "STK" ? item["Country ship-to-party"] = item["Country sold-to-party"] : null,
             item["Report Customer"] === "STK" ? item["PO Quantity"] = item["SD Quantity"] : null,
             item["Report Customer"] === "STK" ? item["PO Invoice Quantity"] = item["Billed Quantity"] : null,
@@ -89,13 +69,7 @@ const functionChange = (files , addData)=>{
 
     OPEN.map(item=> {
         return(
-            // item.report = "OPEN_OTIF",
-            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["Country sold-to-party"] = item["Country ship-to-party"] : null,
-            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["SD Quantity"] = item["PO Quantity"] : null,
-            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["Billed Quantity"] = item["PO Invoice Quantity"] : null,
-            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["Deliv.date last confirm."] = item["PO first commited delivery date"] : null,
-            // item["Report Customer"] === "CLS" || item["Report Customer"] === "JBL" ? item["Billing Date"] = item["SD Billing Doc. created"] : null,
-
+            
             item["Report Customer"] === "STK" ? item["Country ship-to-party"] = item["Country sold-to-party"] : null,
             item["Report Customer"] === "STK" ? item["PO Quantity"] = item["SD Quantity"] : null,
             item["Report Customer"] === "STK" ? item["PO Invoice Quantity"] = item["Billed Quantity"] : null,

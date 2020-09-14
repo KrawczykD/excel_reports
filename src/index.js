@@ -8,8 +8,6 @@ import rootReducer from './reducers/rootReducer';
 
 const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
-const warning = false;
-
 
 ReactDOM.render(
   <React.StrictMode>

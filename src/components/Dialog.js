@@ -1,7 +1,6 @@
 import React from 'react';
 import changeWarningState from '../actions/changeWarningStateAction'
 import {connect} from 'react-redux';
-// import { state } from './ExcelLoad';
 import { Background , Paragraph , Close , Warning } from './Dialog.css.js';
 
 

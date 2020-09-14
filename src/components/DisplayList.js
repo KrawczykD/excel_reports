@@ -142,7 +142,6 @@ const DisplayList = ({OTIF, OPEN})=> {
                 }
                 }
                 if(count===1){
-                    // console.log(myArr[i])
                     myArr[i]["Duplicate"] = false;
                 }
                 count=0;

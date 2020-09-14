@@ -9,16 +9,6 @@ const Macro = (props)=>{
 
 let path = `"C:\\reports\\${currentWeekNumber()}"`
 
-
-
-
-// let startDate = `"${props.startDate}"`;
-// let endDate = `"${props.endDate}"`;
-
-// let startDate = `"${props.startDate}"`;
-// let endDate = `"${props.endDate}"`;
-
-
 const vbs = (startDate , endDate) => {
     let excel =
 `If Not IsObject(application) Then
@@ -216,7 +206,6 @@ const dateStringify = (date)=>{
 
 
     return(
-        // <a style={{paddingLeft:"20px"}} href={excel} download="Macro.txt"> Download Macro Here </a>
         <Div>
              <Input type="date" id="start" name="startDate" onChange={node => startDate = dateStringify(node)} />
              <Input type="date" id="end" name="endDate" onChange={node => endDate = dateStringify(node)} />
