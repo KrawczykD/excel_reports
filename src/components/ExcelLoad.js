@@ -6,6 +6,8 @@ import changeWarningState from '../actions/changeWarningStateAction';
 import {Input , Label} from './Input.css.js';
 import Select from './Select.css.js';
 
+import logo from '../assets/images/landisgyr_logo.png'
+
 const SheetJSFT = [
 	"xlsx", "xlsb", "xlsm", "xls", "xml", "csv", "txt", "ods", "fods", "uos", "sylk", "dif", "dbf", "prn", "qpw", "123", "wb*", "wq*", "html", "htm"
 ].map(function(x) { return "." + x; }).join(",");
@@ -118,6 +120,7 @@ class ExcelLoad extends Component {
   render() {
     return (
         <div>
+            <img src={logo} width="100px" style={{position:"absolute", top:"0", right:"0"}}></img>
             <br></br>
             <Label htmlFor="file">Upload an excel files</Label>
             <Input type="file" className="form-control" id="file" accept={SheetJSFT} onChange={this.handleChange}/>

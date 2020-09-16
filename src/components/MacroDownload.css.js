@@ -10,7 +10,6 @@ export const Div = styled.div`
     border: 1px solid white;
     // border-radius: 10px;
     background: #7AB800;
-    opacity:0.5;
     transition: 0.5s;
 
     :hover{
@@ -32,19 +31,19 @@ export const Div = styled.div`
         border:none;
     }
 
-    ::after {
-        content:"SAP";
-        display: block;
-        height:40px;
-        width:640px;
-        line-height: 40px;
-        padding-right:10px;
-        background:#7AB800;
-        // background:white;
-        text-align:right;
-        line-heigh:20px;
-        border-radius:20px;
-        opacity:1;
+    // ::after {
+    //     content:"SAP";
+    //     display: block;
+    //     height:40px;
+    //     width:640px;
+    //     line-height: 40px;
+    //     padding-right:10px;
+    //     background:#7AB800;
+    //     // background:white;
+    //     text-align:right;
+    //     line-heigh:20px;
+    //     border-radius:20px;
+    //     opacity:1;
     }
 
 `
@@ -55,7 +54,16 @@ export const Info = styled.p`
     font-size 20px;
     background:#7AB800;
     color:white;
+`
 
-
-
+export const Img = styled.img`
+margin:0;
+    width:100px;
+    height:50px;
+    position:absolute;
+    right:-100px;
+    bottom:0px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    background-color: #7AB800;
 `

@@ -60,7 +60,12 @@ const functionChange = (files , addData)=>{
             item["Late Category to 1st Commit"] = `null`,
             item["Comments (all)"] = `null`,
             item["OTIF V's Cust. Req."] = `null`,
-            item["Late Category to Customer requested"] = `null`
+            item["Late Category to Customer requested"] = `null`,
+
+            item["Country"] = item["Country ship-to-party"],
+            item["Cust. Requested date"] = item["Ship-to Pur. Order Date"],
+            item["PO Invoice created"] = item["SD Billing Doc. created"],
+            item["Vendor"] = item["Report Customer"]
         )
     });
 
@@ -91,7 +96,12 @@ const functionChange = (files , addData)=>{
             item["Late Category to 1st Commit"] = `null`,
             item["Comments (all)"] = `null`,
             item["OTIF V's Cust. Req."] = `null`,
-            item["Late Category to Customer requested"] = `null`
+            item["Late Category to Customer requested"] = `null`,
+
+            item["Country"] = item["Country ship-to-party"],
+            item["Cust. Requested date"] = item["Ship-to Pur. Order Date"],
+            item["PO Invoice created"] = item["SD Billing Doc. created"],
+            item["Vendor"] = item["Report Customer"]
 
         )
     });

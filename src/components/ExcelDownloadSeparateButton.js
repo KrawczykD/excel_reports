@@ -9,15 +9,17 @@ const ExcelDownloadSeparateButton = ({customer , file , name , report})=>{
 
         var data;
 
+        //Report Customer = Vendor
+
         switch(report) {
             case "OTIF":
-                return data = dataFile.filter(item => item["Report Customer"] === customer && item["report"] === ChoosenReport ? item : null)
+                return data = dataFile.filter(item => item["Vendor"] === customer && item["report"] === ChoosenReport ? item : null)
 
             case "OPEN": 
-                return data = dataFile.filter(item => item["Report Customer"] === customer && item["report"] === ChoosenReport ? item : null)
+                return data = dataFile.filter(item => item["Vendor"] === customer && item["report"] === ChoosenReport ? item : null)
             
             case null:
-                return data = dataFile.filter(item => item["Report Customer"] === customer ? item : null)
+                return data = dataFile.filter(item => item["Vendor"] === customer ? item : null)
 
             default:
                 return []
@@ -39,7 +41,7 @@ const ExcelDownloadSeparateButton = ({customer , file , name , report})=>{
 
     return(
         <>
-            <Buttons style={{width:"300px" , textAlign:"left"}} onClick={()=>{handleDownloadExcel()}}>{name}</Buttons>
+            <Buttons onClick={()=>{handleDownloadExcel()}}>{name}</Buttons>
         </>
     )
 }

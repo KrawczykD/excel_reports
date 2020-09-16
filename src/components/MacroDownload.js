@@ -1,8 +1,9 @@
 import React from 'react';
 import Button from './Button.css';
 import {DateInput as Input} from './Input.css';
-import {Div , Info} from './MacroDownload.css';
+import {Div , Info , Img} from './MacroDownload.css';
 import currentWeekNumber from'current-week-number';
+import sap from '../assets/images/sap.png';
 
 
 const Macro = (props)=>{
@@ -216,6 +217,7 @@ const dateStringify = (date)=>{
                 "Click download macro for SAP" , accept warning and run macro.<br></br>
                 All reports You can find in c:\reports
             </Info>
+            <Img src={sap}></Img>
         </Div>
     )
 }
