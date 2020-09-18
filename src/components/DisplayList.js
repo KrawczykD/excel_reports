@@ -1,8 +1,9 @@
-import React from 'react';
+import React , {useState , useEffect} from 'react';
 import {connect} from 'react-redux';
 import ReportValidationFunction from './ReportValidationFunction';
 import Table from './DisplayList.css';
 import Button from './DownloadExcelButton';
+import TableButton from './Button.css';
 import ExcelDownloadSeparateButton from './ExcelDownloadSeparateButton';
 
 
@@ -154,12 +155,21 @@ const DisplayList = ({OTIF, OPEN})=> {
             return myArr;
         }
 
+        
+            let [visibletable,setCount] = useState(3);
 
+
+            const leftChgange = ()=>{
+                console.log(document.querySelectorAll("table")[0].classList.toggle("left"))
+            }
     
             
         return(
         <div>
-            <Table>
+            <TableButton onClick={()=> setCount(visibletable=1 ,   leftChgange())}>Display OTIF</TableButton>
+            <TableButton onClick={()=> setCount(visibletable=2 ,   leftChgange())}>Display OPEN</TableButton>
+            <TableButton onClick={()=> setCount(visibletable=3 ,   leftChgange())}>Display OPEN + OTIF</TableButton>
+            {visibletable === 1 ? <Table>
                 <caption><p>Weekly OTIF report</p><Button report={OTIF.map(item=> preferedOrder(item,preferredOrderSetup))} name="OTIF"></Button></caption>
                 <thead>
                     <tr>
@@ -169,8 +179,8 @@ const DisplayList = ({OTIF, OPEN})=> {
                 <tbody>
                         {generateTable(OTIF).tables.map((item , index)=><tr key={index}>{item}</tr>)}
                 </tbody>
-            </Table>
-            <Table>
+            </Table> : null}
+            {visibletable === 2 ? <Table>
                     <caption><p>Weekly OPEN OTIF report</p><Button report={OPEN.map(item=> preferedOrder(item,preferredOrderSetup))} name="OPEN"></Button></caption>
                     <thead>
                         <tr>
@@ -182,9 +192,8 @@ const DisplayList = ({OTIF, OPEN})=> {
                             {generateTable(OPEN).tables.map((item , index)=><tr key={index}>{item}</tr>)}
                             
                     </tbody>
-            </Table>
-            
-            <Table>
+            </Table> : null}
+            {visibletable === 3 ? <Table>
                     <caption><p>OPEN + OTIF duplicates red</p><Button report={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))} name="OPEN OTIF REMOVED DUPLICATES"></Button></caption>
                     <thead>
                         <tr>
@@ -194,7 +203,7 @@ const DisplayList = ({OTIF, OPEN})=> {
                     <tbody>
                             {generateTable(noDuplicate(OPEN , OTIF)).tables.map((item , index)=><tr key={index}>{item}</tr>)}
                     </tbody>
-            </Table>
+            </Table> : null}
             <ExcelDownloadSeparateButton name={"Celestica OPEN + OTIF"} report={null} customer={"CLS"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
             <ExcelDownloadSeparateButton name={"JABIL OPEN + OTIF"} report={null} customer={"JBL"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
             <ExcelDownloadSeparateButton name={"STOCKPORT OPEN + OTIF"} report={null} customer={"STK"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>

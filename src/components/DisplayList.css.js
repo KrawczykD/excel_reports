@@ -3,11 +3,13 @@ import styled from 'styled-components';
 const Table = styled.table`
     
         display: block;
-        height:25vh;
-        max-height:25vh;
+        height:70vh;
+        // max-height:25vh;
         overflow: scroll;
         border: 2px solid black;
         position:relative;
+  
+        transition:left 1s linear;
 
         & > caption {
               background-color:#7AB800;
