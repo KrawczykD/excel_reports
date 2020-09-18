@@ -29,6 +29,7 @@ class ExcelLoad extends Component {
       cols: [],
       report: null,
       customer: null,
+      success: "#FFFFFF"
     }
 
 
@@ -72,6 +73,14 @@ class ExcelLoad extends Component {
         // console.log(JSON.stringify(this.state.data, null, 2));
         this.props.addFile(this.state.data)
       });
+
+      this.setState({
+        customer: null,
+        report:null
+      })
+
+      document.getElementById('report').value = "";
+      document.getElementById('customer').value = "";
     };
  
     if (rABS) {
@@ -99,17 +108,26 @@ class ExcelLoad extends Component {
     if(this.state.file.name !== undefined){
       if(this.state.file.name.slice(0,8) === `${this.state.customer}_${this.state.report}`){
         this.props.changeWarningState(false)
+        this.setState({
+          success: "#28a745",
+        })
         return(this.handleFile())
       }
   
       else{
         this.props.changeWarningState(true)
+          this.setState({
+            success: "#dc3545",
+          })
         return null;
       }
     }
 
     else{
       this.props.changeWarningState(true)
+        this.setState({
+          success: "#dc3545",
+        })
       return null;
     }
 
@@ -138,8 +156,8 @@ class ExcelLoad extends Component {
                 <option value="STK">STK</option>
               </Select>
             
-            <Label htmlFor="submit">Load File</Label>
-            <Input id="submit" type='submit' value="Load File" onClick={()=>{this.checkReport()}}/>
+            <Label color={this.state.success} htmlFor="submit">Load File</Label>
+            <Input className="LoadFile" id="submit" type='submit' value="Load File" onClick={()=>{this.checkReport()}}/>
         </div>
       
     )

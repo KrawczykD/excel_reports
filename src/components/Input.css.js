@@ -12,6 +12,7 @@ export const Label = styled.label`
     padding: 5px 10px;
     margin: 3px;
     border-radius: 2px;
+    background: ${props=> props.color};
 
     :hover {
         color:gray;

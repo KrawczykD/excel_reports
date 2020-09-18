@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useState , useEffect } from 'react';
 import Button from './Button.css';
 import {DateInput as Input} from './Input.css';
 import {Div , Info , Img} from './MacroDownload.css';
@@ -9,6 +9,8 @@ import sap from '../assets/images/sap.png';
 const Macro = (props)=>{
 
 let path = `"C:\\reports\\${currentWeekNumber()}"`
+
+
 
 const vbs = (startDate , endDate) => {
     let excel =
@@ -334,6 +336,7 @@ return excel;
 let startDate;
 let endDate;
 
+
 const saveData = () => {
 
 
@@ -346,17 +349,28 @@ const saveData = () => {
             a.download = 'macro.vbs';
             document.body.appendChild(a);
             a.click();
-            window.URL.revokeObjectURL(url);
+
+            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveOrOpenBlob(blob);
+             }
+             else {
+                 var objectUrl = window.URL.revokeObjectURL(url);
+                  window.open(objectUrl);
+            }
 };
 
 const dateStringify = (date)=>{
-    console.log("data")
     let year = date.target.value.slice(0,4)
     let month = date.target.value.slice(5,7)
     let day = date.target.value.slice(8,10)
     
     return `"${day}.${month}.${year}"`
 }
+
+// function useForceUpdate() {
+//     let [value, setState] = useState(true);
+//     return () => setState(!value);
+//   }
 
 
     return(
@@ -375,4 +389,4 @@ const dateStringify = (date)=>{
     )
 }
 
-export default Macro;
+export default Macro
