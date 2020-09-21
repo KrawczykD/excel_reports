@@ -1,7 +1,7 @@
 import React from 'react';
 import ExcelLoads from './components/ExcelLoad';
 import DisplayList from './components/DisplayList';
-import Footer from './components/Footer.css';
+import Footer from './components/Footer';
 import { Normalize } from 'styled-normalize';
 import MacroDownload from './components/MacroDownload';
 import Dialog from './components/Dialog';

@@ -7,6 +7,7 @@ export const Background = styled.div`
     top:0;
     left:0;
     width:100%;
+    min-width:"1300px";
     height:100vh;
     z-index:0;
     opacity:0.4;
@@ -40,6 +41,7 @@ export const Close = styled.p`
 
 export const Warning = styled.div`
     position:absolute;
+    min-width:400px;
     top:50%;
     left:70%;
     transform: translate(-50%, -50%);

@@ -139,16 +139,12 @@ class ExcelLoad extends Component {
   
       else{
         this.props.changeWarningState(true)
-          this.setState({
-          })
         return null;
       }
     }
 
     else{
       this.props.changeWarningState(true)
-        this.setState({
-        })
       return null;
     }
 

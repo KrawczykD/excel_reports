@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const Div = styled.div`
     position:absolute;
-    bottom:0;
+    bottom:12px;
     left:${(props)=> props.left}px;
     // height:450px;
     width:600px;
