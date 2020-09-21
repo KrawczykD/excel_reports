@@ -13,7 +13,7 @@ function App({warningState}) {
 
   return (
     <>
-    <div className="App" style={{position:"relative" , minHeight:"100vh" , width:"95%" , margin:"0 auto" , fontFamily:"Lato"}}>
+    <div className="App" style={{position:"relative" , minHeight:"100vh" , width:"95%" , minWidth:"1300px" , margin:"0 auto" , fontFamily:"Lato"}}>
       <Normalize/>
       <ExcelLoads></ExcelLoads>
       <DisplayList></DisplayList>

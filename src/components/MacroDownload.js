@@ -8,6 +8,8 @@ import sap from '../assets/images/sap.png';
 
 const Macro = (props)=>{
 
+
+
 let path = `"C:\\reports\\${currentWeekNumber()}"`
 
 
@@ -367,6 +369,10 @@ const dateStringify = (date)=>{
     return `"${day}.${month}.${year}"`
 }
 
+
+
+let [positionLeft,setPosition] = useState(-650);
+
 // function useForceUpdate() {
 //     let [value, setState] = useState(true);
 //     return () => setState(!value);
@@ -374,7 +380,7 @@ const dateStringify = (date)=>{
 
 
     return(
-        <Div>
+        <Div left={positionLeft=positionLeft}>
              <Input type="date" id="start" name="startDate" onChange={node => startDate = dateStringify(node)} />
              <Input type="date" id="end" name="endDate" onChange={node => endDate = dateStringify(node)} />
             <Button onClick={()=>{saveData()}}>{props.buttonText}</Button>
@@ -384,7 +390,7 @@ const dateStringify = (date)=>{
                 "Click download macro for SAP" , accept warning and run macro.<br></br>
                 All reports You can find in c:\reports
             </Info>
-            <Img src={sap}></Img>
+            <Img onClick={()=>{ console.log("clicked" , positionLeft) ; setPosition(positionLeft === -650 ? positionLeft=-50 : positionLeft=-650)}} src={sap}></Img>
         </Div>
     )
 }

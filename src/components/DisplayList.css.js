@@ -8,8 +8,9 @@ const Table = styled.table`
         overflow: scroll;
         border: 2px solid black;
         position:relative;
-  
-        transition:left 1s linear;
+        left:${(props)=>props.left}px;
+
+        transition: left 1s ease-out;
 
         & > caption {
               background-color:#7AB800;

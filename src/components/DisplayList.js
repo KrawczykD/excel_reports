@@ -157,19 +157,19 @@ const DisplayList = ({OTIF, OPEN})=> {
 
         
             let [visibletable,setCount] = useState(3);
+            let [useStyle1,leftChange1] = useState(-window.innerWidth);
+            let [useStyle2,leftChange2] = useState(-window.innerWidth);
+            let [useStyle3,leftChange3] = useState(0);
 
 
-            const leftChgange = ()=>{
-                console.log(document.querySelectorAll("table")[0].classList.toggle("left"))
-            }
-    
+
             
         return(
         <div>
-            <TableButton onClick={()=> setCount(visibletable=1 ,   leftChgange())}>Display OTIF</TableButton>
-            <TableButton onClick={()=> setCount(visibletable=2 ,   leftChgange())}>Display OPEN</TableButton>
-            <TableButton onClick={()=> setCount(visibletable=3 ,   leftChgange())}>Display OPEN + OTIF</TableButton>
-            {visibletable === 1 ? <Table>
+            <TableButton onClick={()=> setCount(visibletable=1 , setTimeout(()=>{ leftChange1(useStyle1=0)}, 100) , leftChange2(useStyle2 = -window.innerWidth) , leftChange3(useStyle3 = -window.innerWidth))}>Display OTIF</TableButton>
+            <TableButton onClick={()=> setCount(visibletable=2 , setTimeout(()=>{ leftChange2(useStyle2=0)}, 100) , leftChange1(useStyle1 = -window.innerWidth) , leftChange3(useStyle3 = -window.innerWidth))}>Display OPEN</TableButton>
+            <TableButton onClick={()=> setCount(visibletable=3 , setTimeout(()=>{ leftChange3(useStyle3=0)}, 100) , leftChange1(useStyle1 = -window.innerWidth) , leftChange2(useStyle2 = -window.innerWidth))}>Display OPEN + OTIF</TableButton>
+            {visibletable === 1 ? <Table left = {useStyle1}>
                 <caption><p>Weekly OTIF report</p><Button report={OTIF.map(item=> preferedOrder(item,preferredOrderSetup))} name="OTIF"></Button></caption>
                 <thead>
                     <tr>
@@ -180,7 +180,7 @@ const DisplayList = ({OTIF, OPEN})=> {
                         {generateTable(OTIF).tables.map((item , index)=><tr key={index}>{item}</tr>)}
                 </tbody>
             </Table> : null}
-            {visibletable === 2 ? <Table>
+            {visibletable === 2 ? <Table left = {useStyle2}>
                     <caption><p>Weekly OPEN OTIF report</p><Button report={OPEN.map(item=> preferedOrder(item,preferredOrderSetup))} name="OPEN"></Button></caption>
                     <thead>
                         <tr>
@@ -193,7 +193,7 @@ const DisplayList = ({OTIF, OPEN})=> {
                             
                     </tbody>
             </Table> : null}
-            {visibletable === 3 ? <Table>
+            {visibletable === 3 ? <Table left = {useStyle3}>
                     <caption><p>OPEN + OTIF duplicates red</p><Button report={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))} name="OPEN OTIF REMOVED DUPLICATES"></Button></caption>
                     <thead>
                         <tr>

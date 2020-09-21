@@ -4,18 +4,15 @@ import styled from 'styled-components';
 export const Div = styled.div`
     position:absolute;
     bottom:0;
-    left:-650px;
+    left:${(props)=> props.left}px;
     // height:450px;
     width:600px;
     border: 1px solid white;
     // border-radius: 10px;
     background: #7AB800;
-    transition: 0.5s;
+    transition: .5s;
+    cursor:pointer;
 
-    :hover{
-        left:-50px;
-        opacity:1;
-    }
 
     & > button{
         margin: 0 auto;

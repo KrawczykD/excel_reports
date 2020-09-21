@@ -5,6 +5,7 @@ import addFile from '../actions/addFileActions';
 import changeWarningState from '../actions/changeWarningStateAction';
 import {Input , Label} from './Input.css.js';
 import Select from './Select.css.js';
+import Popup from './Popup.js';
 
 import logo from '../assets/images/landisgyr_logo.png'
 
@@ -29,7 +30,9 @@ class ExcelLoad extends Component {
       cols: [],
       report: null,
       customer: null,
-      success: "#FFFFFF"
+      loadedCustomer: [],
+      displayPopup: -500,
+      displayPopupOpacity: 0.8,
     }
 
 
@@ -103,21 +106,40 @@ class ExcelLoad extends Component {
     }
   }
 
+  popup = ()=> {
+    this.setState({
+      displayPopup : 0,
+      displayPopupOpacity: 0.8,
+    })
+
+    setTimeout(() => {
+      this.setState({
+        displayPopup : -500,
+      })
+    }, 4000);
+
+    setTimeout(() => {
+      this.setState({
+        displayPopupOpacity: 0,
+      })
+    }, 3000);
+  }
+
   checkReport = ()=>{
 
     if(this.state.file.name !== undefined){
       if(this.state.file.name.slice(0,8) === `${this.state.customer}_${this.state.report}`){
         this.props.changeWarningState(false)
         this.setState({
-          success: "#28a745",
+          loadedCustomer: [...this.state.loadedCustomer , `${this.state.customer} ${this.state.report} `]
         })
+        this.popup();
         return(this.handleFile())
       }
   
       else{
         this.props.changeWarningState(true)
           this.setState({
-            success: "#dc3545",
           })
         return null;
       }
@@ -126,7 +148,6 @@ class ExcelLoad extends Component {
     else{
       this.props.changeWarningState(true)
         this.setState({
-          success: "#dc3545",
         })
       return null;
     }
@@ -138,7 +159,8 @@ class ExcelLoad extends Component {
   render() {
     return (
         <div>
-            <img src={logo} width="100px" style={{position:"absolute", top:"0", right:"0"}}></img>
+            <Popup displayPopupOpacity={this.state.displayPopupOpacity} displayPopup={this.state.displayPopup} items = {this.state.loadedCustomer}></Popup>
+            <a href="https://landisgyr.sharepoint.com/sites/intranet/"><img src={logo} width="100px" style={{position:"absolute", top:"0", right:"0"}}></img></a>
             <br></br>
             <Label htmlFor="file">Upload an excel files</Label>
             <Input type="file" className="form-control" id="file" accept={SheetJSFT} onChange={this.handleChange}/>

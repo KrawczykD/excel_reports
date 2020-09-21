@@ -41,7 +41,7 @@ export const Close = styled.p`
 export const Warning = styled.div`
     position:absolute;
     top:50%;
-    left:50%;
+    left:70%;
     transform: translate(-50%, -50%);
     width:30%;
     height:40%;
