@@ -9,7 +9,7 @@ export const Div = styled.div`
     width:600px;
     border: .1rem solid white;
     // border-radius: 1rem;
-    background: #7AB800;
+    background-color:${props=> props.theme.main.color};
     transition: .5s;
 
 
@@ -38,14 +38,14 @@ export const Info = styled.p`
 
     padding: 1.5rem;
     font-size 1.5rem;
-    background:#7AB800;
+    background-color:${props=> props.theme.main.color};
     color:white;
 `
 
 export const Img = styled.img`
     margin:0;
     width:60px;
-    height:40px;
+    height:35px;
     position:absolute;
     left:0px;
     bottom:0px;
@@ -54,6 +54,6 @@ export const Img = styled.img`
     // border-bottom-right-radius: 5rem;
     border-radius: 5rem;
     // transform:rotate(90deg);
-    background-color: #7AB800;
+    background-color:${props=> props.theme.main.color};
     z-index:999;
 `

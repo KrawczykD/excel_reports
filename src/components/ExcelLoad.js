@@ -156,8 +156,9 @@ class ExcelLoad extends Component {
     return (
         <div>
             <Popup displayPopupOpacity={this.state.displayPopupOpacity} displayPopup={this.state.displayPopup} items = {this.state.loadedCustomer}></Popup>
-            <a href="https://landisgyr.sharepoint.com/sites/intranet/"><img src={logo} width="100px" style={{position:"absolute", top:"0", right:"0"}}></img></a>
+            <a href="https://landisgyr.sharepoint.com/sites/intranet/" title="Landis+Gyr website"><img alt="Landis and Gyr logo" src={logo} width="100px" style={{position:"absolute", top:"0", right:"0"}}></img></a>
             <br></br>
+
             <Label htmlFor="file">Upload an excel files</Label>
             <Input type="file" className="form-control" id="file" accept={SheetJSFT} onChange={this.handleChange}/>
             

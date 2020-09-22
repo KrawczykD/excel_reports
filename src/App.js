@@ -6,12 +6,19 @@ import MacroDownload from './components/MacroDownload';
 import Dialog from './components/Dialog';
 import ContainerDiv from './components/Container.css';
 import {connect} from 'react-redux';
+import {ThemeProvider} from 'styled-components'
 
 
 function App({warningState}) {
 
+  const Theme = {
+    main : {
+      color: "#7AB800"
+    }
+  }
+
   return (
-    <>
+    <ThemeProvider theme={Theme}>
       <ContainerDiv>
         <ExcelLoads></ExcelLoads>
         <DisplayList></DisplayList>
@@ -19,7 +26,7 @@ function App({warningState}) {
         <Footer></Footer>
       </ContainerDiv>
     {warningState ? <Dialog text="Oops! Looks like you missed something. Check report file, customer or report type!"></Dialog> : null}
-    </>
+    </ThemeProvider>
   );
 }
 

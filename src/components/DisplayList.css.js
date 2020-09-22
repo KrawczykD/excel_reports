@@ -13,7 +13,7 @@ const Table = styled.table`
         transition: left 1s ease-out;
 
         & > caption {
-              background-color:#7AB800;
+              background-color:${props=> props.theme.main.color};
               display:block;
               color:#FFF;
               padding:.5rem;

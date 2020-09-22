@@ -6,11 +6,12 @@ export const GlobalStyle = createGlobalStyle`
     html{
       font-size:15px;
       font-family:lato;
+      min-width:900px;
     }
 
     @media (min-resolution:125dpi) {
       html {
-        font-size:10px;
+        font-size:8px;
       }
     }
     
