@@ -16,10 +16,10 @@ export const Background = styled.div`
 `
 export const Paragraph = styled.p`
 
-    font-size:30px;
-    padding:20px;
+    font-size:2rem;
+    padding:2rem;
     font-family:lato;
-    letter-spacing:1px;
+    letter-spacing:.1rem;
 
 
 `
@@ -27,7 +27,7 @@ export const Close = styled.p`
     display:inline-block;
     font-family:lato;
     opacity:1;
-    font-size:40px;
+    font-size:2rem;
     position:relative; 
     top:0; 
     right:-90%; 
@@ -41,12 +41,11 @@ export const Close = styled.p`
 
 export const Warning = styled.div`
     position:absolute;
-    min-width:400px;
     top:50%;
     left:70%;
     transform: translate(-50%, -50%);
     width:30%;
     height:40%;
     background-color:white;
-    border-radius:10px;
+    border-radius:1rem;
 `

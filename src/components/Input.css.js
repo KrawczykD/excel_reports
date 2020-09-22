@@ -5,12 +5,12 @@ export const Input = styled.input`
 `
 
 export const Label = styled.label`
-    font-size: 20px;
+    font-size: 1.2rem;
     border: 1px solid black;
     display: inline;
     cursor:pointer;
-    padding: 5px 10px;
-    margin: 3px;
+    padding: .5rem .7rem;
+    margin: .2rem;
     border-radius: 2px;
     background: ${props=> props.color};
 
@@ -20,9 +20,9 @@ export const Label = styled.label`
 `
 
 export const DateInput = styled.input`
-    font-size: 20px;
+    font-size: 1.2rem;
     border: 1px solid black;
-    padding: 3px 10px;
-    margin: 3px;
+    padding: .5rem .7rem;
+    margin: .2rem;
     border-radius: 2px;
 `

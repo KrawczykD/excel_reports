@@ -6,7 +6,7 @@ const Table = styled.table`
         height:70vh;
         // max-height:25vh;
         overflow: scroll;
-        border: 2px solid black;
+        border: .2rem solid black;
         position:relative;
         left:${(props)=>props.left}px;
 
@@ -16,34 +16,34 @@ const Table = styled.table`
               background-color:#7AB800;
               display:block;
               color:#FFF;
-              padding:5px;
-              font-size: 30px;
+              padding:.5rem;
+              font-size: 1.7rem;
               position:relative;
 
               & > p {
                 display:inline;
-                letter-spacing:1px;
+                letter-spacing:.1rem;
               }
 
               & > button {
                 position:absolute;
                 top:0;
                 right:0;
-                letter-spacing:1px;
+                letter-spacing:.1rem;
               }
           }
 
           & > thead > tr > th {
-              padding: 2px;
-              border-bottom: 1px solid black;
+              padding: .2rem;
+              border-bottom: .1rem solid black;
               position: sticky;
               top:0;
               background-color:white;
             }
 
             & > tbody >tr > td {
-                padding: 2px;
-                border-bottom: 1px solid black;
+                padding: .1rem;
+                border-bottom: .1rem solid black;
               
               }
       

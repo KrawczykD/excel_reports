@@ -7,13 +7,16 @@ const Footerfooter = styled.footer`
     position: absolute;
     bottom: 0;
     left: 0;
-
+    margin:0;
+    pading:0;
+    overflow:hidden;
     & > p {
+        display:block;
         width:90%;
         text-align:right;
         margin:0;
-        padding:0;
-        font-size:4px;
+        pading:0;
+        font-size:1rem;
         color:#FFFFFF;
     }
     

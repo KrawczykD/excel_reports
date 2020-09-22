@@ -5,9 +5,9 @@ export const PopupDiv = styled.div`
     top:200px;
     left:${(props)=>props.displayPopup}px;
     opacity: ${(props)=>(props.displayPopupOpacity)};
-    width:300px;
+    width:350px;
     background-color:#28a745;
-    border-radius: 50px;
+    border-radius: 10rem;
 
     transition:opacity 1s linear ,left 1s ease-out;
 
@@ -18,11 +18,11 @@ export const PopupDiv = styled.div`
 
     & > ul {
         list-style:none;
-        padding: 0px;
+        padding: 0;
     }
 
     & > ul > li {
-        padding: 5px 50px;
+        padding: .5rem 5rem;
         color:#FFFFFF;
     }
 `

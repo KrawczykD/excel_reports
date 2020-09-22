@@ -380,6 +380,7 @@ let [positionLeft,setPosition] = useState(-650);
 
 
     return(
+        <>
         <Div left={positionLeft=positionLeft}>
              <Input type="date" id="start" name="startDate" onChange={node => startDate = dateStringify(node)} />
              <Input type="date" id="end" name="endDate" onChange={node => endDate = dateStringify(node)} />
@@ -390,8 +391,9 @@ let [positionLeft,setPosition] = useState(-650);
                 "Click download macro for SAP" , accept warning and run macro.<br></br>
                 All reports You can find in c:\reports
             </Info>
-            <Img onClick={()=>{ console.log("clicked" , positionLeft) ; setPosition(positionLeft === -650 ? positionLeft=-50 : positionLeft=-650)}} src={sap}></Img>
         </Div>
+        <Img onClick={()=>{ console.log("clicked") ; setPosition(positionLeft === -650 ? positionLeft=0 : positionLeft=-650)}} src={sap}></Img>
+        </>
     )
 }
 

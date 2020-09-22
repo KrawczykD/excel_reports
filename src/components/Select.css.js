@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 
 const Select = styled.select`
-    font-size:20px;
+    font-size: 1.2rem;
     border: 1 px solid black;
     border-radius: 2px;
-    padding: 5px 10px;
-    margin: 3px;
+    padding: .45rem .7rem;
+    margin: .2rem;
     
     option:selected {
         color:gray;

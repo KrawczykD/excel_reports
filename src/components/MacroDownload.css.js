@@ -3,64 +3,57 @@ import styled from 'styled-components';
 
 export const Div = styled.div`
     position:absolute;
-    bottom:12px;
+    bottom:1.2rem;
     left:${(props)=> props.left}px;
-    // height:450px;
+    // height:600px;
     width:600px;
-    border: 1px solid white;
-    // border-radius: 10px;
+    border: .1rem solid white;
+    // border-radius: 1rem;
     background: #7AB800;
     transition: .5s;
-    cursor:pointer;
 
 
     & > button{
         margin: 0 auto;
         // background:white;
         border:none;
+        cursor:pointer;
     }
 
 
     & > * {
         display:block;
-        margin: 30px auto;
+        margin: 3rem auto;
         background:white;
         border:none;
     }
 
-    // ::after {
-    //     content:"SAP";
-    //     display: block;
-    //     height:40px;
-    //     width:640px;
-    //     line-height: 40px;
-    //     padding-right:10px;
-    //     background:#7AB800;
-    //     // background:white;
-    //     text-align:right;
-    //     line-heigh:20px;
-    //     border-radius:20px;
-    //     opacity:1;
+    & > input {
+        cursor:pointer;
     }
 
 `
 
 export const Info = styled.p`
 
-    padding: 20px;
-    font-size 20px;
+    padding: 1.5rem;
+    font-size 1.5rem;
     background:#7AB800;
     color:white;
 `
 
 export const Img = styled.img`
-margin:0;
-    width:100px;
-    height:50px;
+    margin:0;
+    width:60px;
+    height:40px;
     position:absolute;
-    right:-100px;
+    left:0px;
     bottom:0px;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
+    cursor:pointer;
+    // border-top-right-radius: 5rem;
+    // border-bottom-right-radius: 5rem;
+    border-radius: 5rem;
+    // transform:rotate(90deg);
     background-color: #7AB800;
+    z-index:999;
 `
