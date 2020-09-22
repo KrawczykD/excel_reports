@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "dac796c531893711e51b6ea61117ec4d",
+    "revision": "26931d5a9cd2e6319a9a4bd413b9c7d7",
     "url": "/excel_reports/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/excel_reports/static/js/2.ef226097.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5b17c3ec9f5ca90e2efe",
-    "url": "/excel_reports/static/js/main.169da85a.chunk.js"
+    "revision": "03098b2396d86899fade",
+    "url": "/excel_reports/static/js/main.b3fdf1e5.chunk.js"
   },
   {
     "revision": "db8d4807816cd222f8be",
