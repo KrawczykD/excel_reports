@@ -133,7 +133,27 @@ const DisplayList = ({OTIF, OPEN})=> {
 
     
 
-        const noDuplicate = (A, B)=>{
+        const duplicateCheck = (A, B)=>{
+      
+            var myArr=A.concat(B);
+            var count=0;
+            for(let i=0;i<myArr.length;i++){
+                for(let j=0;j<myArr.length;j++){
+                if(myArr[j]["SO + Line"]===myArr[i]["SO + Line"]){
+                    count++;
+                     myArr[i]["Duplicate"] = true;
+
+                }
+                }
+                if(count===1){
+                    myArr[i]["Duplicate"] = false;
+                }
+                count=0;
+            }
+            return myArr;
+        }
+
+        const duplicateRemove = (A, B)=>{
       
             var myArr=A.concat(B);
             var count=0;
@@ -151,7 +171,8 @@ const DisplayList = ({OTIF, OPEN})=> {
                 count=0;
             }
 
-
+            myArr = myArr.filter(item=> item.["Duplicate"] === false? item : null)
+            console.log(myArr)
             return myArr;
         }
 
@@ -161,14 +182,21 @@ const DisplayList = ({OTIF, OPEN})=> {
             let [useStyle2,leftChange2] = useState(-window.innerWidth);
             let [useStyle3,leftChange3] = useState(0);
 
+            let [toggleDuplicate, toggleDuplicateRemove] = useState(false);
 
+        // const toggleDuplicateRemove = ()=> {
+        //     toggleDuplicate = !toggleDuplicate;
 
+        //     document.getElementById('toggleDuplicateButton').innerText = toggleDuplicate ? "X" : "O"
+    
+        // }
             
         return(
         <div>
             <TableButton onClick={()=> setCount(visibletable=1 , setTimeout(()=>{ leftChange1(useStyle1=0)}, 100) , leftChange2(useStyle2 = -window.innerWidth) , leftChange3(useStyle3 = -window.innerWidth))}>Display OTIF</TableButton>
             <TableButton onClick={()=> setCount(visibletable=2 , setTimeout(()=>{ leftChange2(useStyle2=0)}, 100) , leftChange1(useStyle1 = -window.innerWidth) , leftChange3(useStyle3 = -window.innerWidth))}>Display OPEN</TableButton>
             <TableButton onClick={()=> setCount(visibletable=3 , setTimeout(()=>{ leftChange3(useStyle3=0)}, 100) , leftChange1(useStyle1 = -window.innerWidth) , leftChange2(useStyle2 = -window.innerWidth))}>Display OPEN + OTIF</TableButton>
+            <TableButton onClick={()=>{toggleDuplicateRemove(toggleDuplicate=!toggleDuplicate)}}>{toggleDuplicate ? "Duplicates Removed" : "Duplicates Added"}</TableButton>
             {visibletable === 1 ? <Table left = {useStyle1}>
                 <caption><p>Weekly OTIF report</p><Button report={OTIF.map(item=> preferedOrder(item,preferredOrderSetup))} name="OTIF"></Button></caption>
                 <thead>
@@ -194,27 +222,28 @@ const DisplayList = ({OTIF, OPEN})=> {
                     </tbody>
             </Table> : null}
             {visibletable === 3 ? <Table left = {useStyle3}>
-                    <caption><p>OPEN + OTIF duplicates red</p><Button report={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))} name="OPEN OTIF REMOVED DUPLICATES"></Button></caption>
+                <caption><p>{toggleDuplicate ? "OPEN + OTIF Duplicates Removed" : "OPEN + OTIF Duplicates Added Red"}</p><Button report={toggleDuplicate ? duplicateRemove(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup)) : duplicateCheck(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))} name="OPEN OTIF REMOVED DUPLICATES"></Button></caption>
                     <thead>
                         <tr>
-                            {generateTable(noDuplicate(OPEN , OTIF)).headers}
+                            {generateTable(duplicateCheck(OPEN , OTIF)).headers}
                         </tr>
                     </thead>
                     <tbody>
-                            {generateTable(noDuplicate(OPEN , OTIF)).tables.map((item , index)=><tr key={index}>{item}</tr>)}
+                            {toggleDuplicate ? generateTable(duplicateRemove(OPEN , OTIF)).tables.map((item , index)=><tr key={index}>{item}</tr>) : generateTable(duplicateCheck(OPEN , OTIF)).tables.map((item , index)=><tr key={index}>{item}</tr>)}
                     </tbody>
             </Table> : null}
-            <ExcelDownloadSeparateButton name={"Celestica OPEN + OTIF"} report={null} customer={"CLS"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
-            <ExcelDownloadSeparateButton name={"JABIL OPEN + OTIF"} report={null} customer={"JBL"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
-            <ExcelDownloadSeparateButton name={"STOCKPORT OPEN + OTIF"} report={null} customer={"STK"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
+            
+            <ExcelDownloadSeparateButton name={"Celestica OPEN + OTIF"} report={null} customer={"CLS"} file={toggleDuplicate ? duplicateRemove(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup)) : duplicateCheck(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
+            <ExcelDownloadSeparateButton name={"JABIL OPEN + OTIF"} report={null} customer={"JBL"} file={toggleDuplicate ? duplicateRemove(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup)) : duplicateCheck(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
+            <ExcelDownloadSeparateButton name={"STOCKPORT OPEN + OTIF"} report={null} customer={"STK"} file={toggleDuplicate ? duplicateRemove(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup)) : duplicateCheck(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
             <br></br>
-            <ExcelDownloadSeparateButton name={"Celestica OTIF"} customer={"CLS"} report={"OTIF"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
-            <ExcelDownloadSeparateButton name={"JABIL OTIF"} customer={"JBL"} report={"OTIF"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
-            <ExcelDownloadSeparateButton name={"STOCKPORT OTIF"} customer={"STK"} report={"OTIF"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
+            <ExcelDownloadSeparateButton name={"Celestica OTIF"} customer={"CLS"} report={"OTIF"} file={toggleDuplicate ? duplicateRemove(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup)) : duplicateCheck(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
+            <ExcelDownloadSeparateButton name={"JABIL OTIF"} customer={"JBL"} report={"OTIF"} file={toggleDuplicate ? duplicateRemove(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup)) : duplicateCheck(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
+            <ExcelDownloadSeparateButton name={"STOCKPORT OTIF"} customer={"STK"} report={"OTIF"} file={toggleDuplicate ? duplicateRemove(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup)) : duplicateCheck(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
             <br></br>
-            <ExcelDownloadSeparateButton name={"Celestica OPEN"} customer={"CLS"} report={"OPEN"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
-            <ExcelDownloadSeparateButton name={"JABIL OPEN"} customer={"JBL"} report={"OPEN"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
-            <ExcelDownloadSeparateButton name={"STOCKPORT OPEN"} customer={"STK"} report={"OPEN"} file={noDuplicate(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
+            <ExcelDownloadSeparateButton name={"Celestica OPEN"} customer={"CLS"} report={"OPEN"} file={toggleDuplicate ? duplicateRemove(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup)) : duplicateCheck(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
+            <ExcelDownloadSeparateButton name={"JABIL OPEN"} customer={"JBL"} report={"OPEN"} file={toggleDuplicate ? duplicateRemove(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup)) : duplicateCheck(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
+            <ExcelDownloadSeparateButton name={"STOCKPORT OPEN"} customer={"STK"} report={"OPEN"} file={toggleDuplicate ? duplicateRemove(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup)) : duplicateCheck(OPEN , OTIF).map(item=> preferedOrder(item,preferredOrderSetup))}></ExcelDownloadSeparateButton>
             <ReportValidationFunction></ReportValidationFunction>
         </div>
         )
