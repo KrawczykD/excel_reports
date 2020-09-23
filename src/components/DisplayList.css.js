@@ -10,7 +10,7 @@ const Table = styled.table`
         position:relative;
         left:${(props)=>props.left}px;
 
-        transition: left 1s ease-out;
+        transition: left 1s;
 
         & > caption {
               background-color:${props=> props.theme.main.color};
