@@ -1,14 +1,11 @@
-const addExcelFile = (state = [] , action)=>{
+const addExcelFile = (state = [], action) => {
+  switch (action.type) {
+    case "ADD_FILE":
+      return [...state, action.data];
 
-    switch(action.type) {
-        case "ADD_FILE":
-            return [...state,action.data]
-
-    
-
-        default:
-            return [...state]
-    }
-}
+    default:
+      return [...state];
+  }
+};
 
 export default addExcelFile;

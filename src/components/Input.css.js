@@ -1,28 +1,28 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Input = styled.input`
-    display:none;
-`
+  display: none;
+`;
 
 export const Label = styled.label`
-    font-size: 1.2rem;
-    border: 1px solid black;
-    display: inline;
-    cursor:pointer;
-    padding: .5rem .7rem;
-    margin: .2rem;
-    border-radius: 2px;
-    background: ${props=> props.color};
+  font-size: 1.2rem;
+  border: 1px solid black;
+  display: inline;
+  cursor: pointer;
+  padding: 0.5rem 0.7rem;
+  margin: 0.2rem;
+  border-radius: 2px;
+  background: ${(props) => props.color};
 
-    :hover {
-        color:gray;
-    }
-`
+  :hover {
+    color: gray;
+  }
+`;
 
 export const DateInput = styled.input`
-    font-size: 1.2rem;
-    border: 1px solid black;
-    padding: .5rem .7rem;
-    margin: .2rem;
-    border-radius: 2px;
-`
+  font-size: 1.2rem;
+  border: 1px solid black;
+  padding: 0.5rem 0.7rem;
+  margin: 0.2rem;
+  border-radius: 2px;
+`;

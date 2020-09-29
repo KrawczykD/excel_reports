@@ -1,22 +1,15 @@
-import React , { useState , useEffect } from 'react';
-import Button from './Button.css';
-import {DateInput as Input} from './Input.css';
-import {Div , Info , Img} from './MacroDownload.css';
-import currentWeekNumber from'current-week-number';
-import sap from '../assets/images/sap.png';
+import React, { useState, useEffect } from "react";
+import Button from "./Button.css";
+import { DateInput as Input } from "./Input.css";
+import { Div, Info, Img } from "./MacroDownload.css";
+import currentWeekNumber from "current-week-number";
+import sap from "../assets/images/sap.png";
 
+const Macro = (props) => {
+  let path = `"C:\\reports\\${currentWeekNumber()}"`;
 
-const Macro = (props)=>{
-
-
-
-let path = `"C:\\reports\\${currentWeekNumber()}"`
-
-
-
-const vbs = (startDate , endDate) => {
-    let excel =
-`If Not IsObject(application) Then
+  const vbs = (startDate, endDate) => {
+    let excel = `If Not IsObject(application) Then
 Set SapGuiAuto  = GetObject("SAPGUI")
 Set application = SapGuiAuto.GetScriptingEngine
 End If
@@ -330,71 +323,91 @@ session.findById("wnd[1]/usr/ctxtDY_FILENAME").caretPosition = 13
 session.findById("wnd[1]/tbar[0]/btn[0]").press
 session.findById("wnd[0]/tbar[0]/btn[3]").press
 session.findById("wnd[0]/tbar[0]/btn[3]").press
-`
+`;
 
-return excel;
-}
+    return excel;
+  };
 
-let startDate;
-let endDate;
+  let startDate;
+  let endDate;
 
+  const saveData = () => {
+    var blob = new Blob([vbs(startDate, endDate)], {
+      type: "txt/plain;charset=utf-8",
+      endings: "native",
+    });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.style.display = "none";
+    a.href = url;
+    a.download = "macro.vbs";
+    document.body.appendChild(a);
+    a.click();
 
-const saveData = () => {
+    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+      window.navigator.msSaveOrOpenBlob(blob);
+    } else {
+      var objectUrl = window.URL.revokeObjectURL(url);
+      window.open(objectUrl);
+    }
+  };
 
+  const dateStringify = (date) => {
+    let year = date.target.value.slice(0, 4);
+    let month = date.target.value.slice(5, 7);
+    let day = date.target.value.slice(8, 10);
 
-    
-            var  blob = new Blob([vbs(startDate , endDate)], {type: "txt/plain;charset=utf-8" , endings: "native"})
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.style.display = 'none';
-            a.href = url;
-            a.download = 'macro.vbs';
-            document.body.appendChild(a);
-            a.click();
+    return `"${day}.${month}.${year}"`;
+  };
 
-            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-                window.navigator.msSaveOrOpenBlob(blob);
-             }
-             else {
-                 var objectUrl = window.URL.revokeObjectURL(url);
-                  window.open(objectUrl);
-            }
+  let [positionLeft, setPosition] = useState(-650);
+
+  // function useForceUpdate() {
+  //     let [value, setState] = useState(true);
+  //     return () => setState(!value);
+  //   }
+
+  return (
+    <>
+      <Div left={(positionLeft = positionLeft)}>
+        <Input
+          type="date"
+          id="start"
+          name="startDate"
+          onChange={(node) => (startDate = dateStringify(node))}
+        />
+        <Input
+          type="date"
+          id="end"
+          name="endDate"
+          onChange={(node) => (endDate = dateStringify(node))}
+        />
+        <Button
+          onClick={() => {
+            saveData();
+          }}
+        >
+          {props.buttonText}
+        </Button>
+        <Info>
+          Logged in to SAP and stay on main screen. <br></br>
+          Choose start and finish report date. <br></br>
+          "Click download macro for SAP" , accept warning and run macro.
+          <br></br>
+          All reports You can find in c:\reports
+        </Info>
+      </Div>
+      <Img
+        onClick={() => {
+          console.log("clicked");
+          setPosition(
+            positionLeft === -650 ? (positionLeft = 0) : (positionLeft = -650)
+          );
+        }}
+        src={sap}
+      ></Img>
+    </>
+  );
 };
 
-const dateStringify = (date)=>{
-    let year = date.target.value.slice(0,4)
-    let month = date.target.value.slice(5,7)
-    let day = date.target.value.slice(8,10)
-    
-    return `"${day}.${month}.${year}"`
-}
-
-
-
-let [positionLeft,setPosition] = useState(-650);
-
-// function useForceUpdate() {
-//     let [value, setState] = useState(true);
-//     return () => setState(!value);
-//   }
-
-
-    return(
-        <>
-        <Div left={positionLeft=positionLeft}>
-             <Input type="date" id="start" name="startDate" onChange={node => startDate = dateStringify(node)} />
-             <Input type="date" id="end" name="endDate" onChange={node => endDate = dateStringify(node)} />
-            <Button onClick={()=>{saveData()}}>{props.buttonText}</Button>
-            <Info>
-                Logged in to SAP and stay on main screen. <br></br>
-                Choose start and finish report date. <br></br>
-                "Click download macro for SAP" , accept warning and run macro.<br></br>
-                All reports You can find in c:\reports
-            </Info>
-        </Div>
-        <Img onClick={()=>{ console.log("clicked") ; setPosition(positionLeft === -650 ? positionLeft=0 : positionLeft=-650)}} src={sap}></Img>
-        </>
-    )
-}
-
-export default Macro
+export default Macro;

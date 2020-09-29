@@ -7,7 +7,6 @@ width:95%;
 position:relative;
 min-height:100vh;
 
-`
+`;
 
-
-export default ContainerDiv
+export default ContainerDiv;
