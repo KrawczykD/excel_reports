@@ -22,7 +22,7 @@ export const Label = styled.label`
 export const DateInput = styled.input`
   font-size: 1.2rem;
   border: 1px solid black;
-  padding: 0.5rem 0.7rem;
+  padding: 0.35rem 0.7rem;
   margin: 0.2rem;
-  border-radius: 2px;
+  border-radius: 3px;
 `;

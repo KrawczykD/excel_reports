@@ -5,24 +5,49 @@ import Table from "./DisplayList.css";
 import Button from "./DownloadExcelButton";
 import TableButton from "./Button.css";
 import ExcelDownloadSeparateButton from "./ExcelDownloadSeparateButton";
+import currentWeek from "current-week-number";
+import { DateInput as Input } from "./Input.css";
 
 let databaseData;
+let inputDate;
 
-fetch(`${process.env.REACT_APP_SERVER}/getreports`, {
-  method: "GET", // or 'PUT'
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify(),
-})
-  .then((response) => response.json())
-  .then((data) => {
-    databaseData = data;
-    console.log("Success:", data);
+// Date.prototype.toDateInputValue = function () {
+//   var local = new Date(this);
+//   local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+//   return local.toJSON().slice(0, 10);
+// };
+
+const dbRequest = (date) => {
+  let searchDate = `${currentWeek(date)}-${
+    inputDate ? inputDate.slice(6, 10) : new Date().getFullYear()
+  }`;
+
+  fetch(`${process.env.REACT_APP_SERVER}/getreports?date=${searchDate}`, {
+    method: "GET", // or 'PUT'
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(),
   })
-  .catch((error) => {
-    console.error("Error:", error);
-  });
+    .then((response) => response.json())
+    .then((data) => {
+      databaseData = data;
+      console.log("Success:", data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+};
+
+const dateStringify = (date) => {
+  let year = date.target.value.slice(0, 4);
+  let month = date.target.value.slice(5, 7);
+  let day = date.target.value.slice(8, 10);
+
+  return `${month}/${day}/${year}`;
+};
+
+dbRequest();
 
 const DisplayList = ({ OTIF, OPEN }) => {
   const preferredOrderSetup = [
@@ -276,20 +301,31 @@ const DisplayList = ({ OTIF, OPEN }) => {
         Display OPEN + OTIF
       </TableButton>
       <TableButton
-        onClick={() =>
+        onClick={() => (
+          dbRequest(inputDate),
           setCount(
             (visibletable = 4),
             setTimeout(() => {
+              leftChange4((useStyle4 = -window.innerWidth));
               leftChange4((useStyle4 = 0));
             }, 100),
             leftChange1((useStyle1 = -window.innerWidth)),
             leftChange2((useStyle2 = -window.innerWidth)),
             leftChange3((useStyle3 = -window.innerWidth))
           )
-        }
+        )}
       >
-        Display DB
+        {visibletable === 4 ? "Search Database" : "Display Database"}
       </TableButton>
+      {visibletable === 4 ? (
+        <Input
+          type="date"
+          id="start"
+          name="inputDate"
+          onChange={(node) => (inputDate = dateStringify(node))}
+        />
+      ) : null}
+      {/* ///////////"09/27/2020" */}
       {visibletable !== 4 ? (
         <TableButton
           onClick={() => {
@@ -383,7 +419,7 @@ const DisplayList = ({ OTIF, OPEN }) => {
       {visibletable === 4 ? (
         <Table left={useStyle4} style={{ height: "80vh" }}>
           <caption>
-            <p>DB</p>
+            <p>Database</p>
             <Button
               report={databaseData.data.map((item) =>
                 preferedOrder(item, preferredOrderSetup)

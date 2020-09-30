@@ -2,8 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import currentWeekNumber from "current-week-number";
 import addData from "../actions/addDataAction";
+import addWeekNumber from "../actions/addWeekNumberAction";
 import Buttons from "./Button.css";
-const functionChange = (files, addData) => {
+const functionChange = (
+  files,
+  addData,
+  addWeekNumberReducer,
+  addWeekNumber
+) => {
   let OTIF = [];
   let OPEN = [];
 
@@ -49,7 +55,7 @@ const functionChange = (files, addData) => {
         ? (item["SD Billing Doc. created"] = item["Billing Date"])
         : null,
       (item.Product = item["Material"].slice(0, 4)),
-      (item["WW-YYYY"] = `${currentWeekNumber()}-${new Date().getFullYear()}`),
+      (item["WW-YYYY"] = `${addWeekNumberReducer}`),
       (item["SD Billing Doc. created"] = excelData(
         item["SD Billing Doc. created"]
       )),
@@ -97,7 +103,7 @@ const functionChange = (files, addData) => {
         ? (item["SD Billing Doc. created"] = item["Billing Date"])
         : null,
       (item.Product = item["Material"].slice(0, 4)),
-      (item["WW-YYYY"] = `${currentWeekNumber()}-${new Date().getFullYear()}`),
+      (item["WW-YYYY"] = `${addWeekNumberReducer}`),
       (item["Deliv.date last confirm."] = excelData(
         item["Deliv.date last confirm."]
       )),
@@ -127,13 +133,18 @@ const functionChange = (files, addData) => {
 
   addData(OTIF, OPEN);
 };
-const reportValidationFunction = ({ files, addData }) => {
+const reportValidationFunction = ({
+  files,
+  addData,
+  addWeekNumberReducer,
+  addWeekNumber,
+}) => {
   return (
     <>
       <Buttons
         style={{ position: "absolute", bottom: "20px", right: "0" }}
         onClick={() => {
-          functionChange(files, addData);
+          functionChange(files, addData, addWeekNumberReducer, addWeekNumber);
         }}
       >
         Generate report
@@ -144,10 +155,12 @@ const reportValidationFunction = ({ files, addData }) => {
 
 const mapStateToProps = (state) => ({
   files: state.addExcelFile,
+  addWeekNumberReducer: state.addWeekNumberReducer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   addData: (OTIF, OPEN) => dispatch(addData(OTIF, OPEN)),
+  addWeekNumber: (currentWeek) => dispatch(addWeekNumber(currentWeek)),
 });
 
 export default connect(

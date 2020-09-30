@@ -54,8 +54,8 @@ app.post("/reports", (req, res) => {
 });
 
 app.get("/getreports", async (req, res) => {
-  console.log(req.path);
-  await Record.find({}, (err, reports) => {
+  console.log(req.query.date);
+  await Record.find({ "WW-YYYY": `${req.query.date}` }, (err, reports) => {
     if (err) {
       return res.status(400).json({ success: false, error: err });
     }

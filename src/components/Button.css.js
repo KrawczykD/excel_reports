@@ -8,7 +8,7 @@ const Buttons = styled.button`
   margin: 0.2rem;
   border: 0.1rem solid black;
   border-radius: 0.2rem;
-  width: 20rem;
+  width: 18rem;
   text-align: left;
   transition: 0.4s;
 

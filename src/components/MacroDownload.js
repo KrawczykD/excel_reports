@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import Button from "./Button.css";
 import { DateInput as Input } from "./Input.css";
 import { Div, Info, Img } from "./MacroDownload.css";
-import currentWeekNumber from "current-week-number";
 import sap from "../assets/images/sap.png";
+import { connect } from "react-redux";
+import addWeekNumber from "../actions/addWeekNumberAction";
+import currentWeekNumber from "current-week-number";
 
 const Macro = (props) => {
   // let path = `"C:\\reports\\${currentWeekNumber()}"`
@@ -252,6 +254,7 @@ session.findById("wnd[0]/tbar[0]/btn[3]").press
 
   let startDate;
   let endDate;
+  let weekDate;
 
   const saveData = () => {
     var blob = new Blob([vbs(startDate, endDate)], {
@@ -272,6 +275,9 @@ session.findById("wnd[0]/tbar[0]/btn[3]").press
       var objectUrl = window.URL.revokeObjectURL(url);
       window.open(objectUrl);
     }
+    props.addWeekNumber(
+      `${currentWeekNumber(weekDate)}-${weekDate.slice(7, 11)}`
+    );
   };
 
   const dateStringify = (date) => {
@@ -280,6 +286,14 @@ session.findById("wnd[0]/tbar[0]/btn[3]").press
     let day = date.target.value.slice(8, 10);
 
     return `"${day}.${month}.${year}"`;
+  };
+
+  const dateStringifyWeekNumber = (date) => {
+    let year = date.target.value.slice(0, 4);
+    let month = date.target.value.slice(5, 7);
+    let day = date.target.value.slice(8, 10);
+
+    return `"${month}/${day}/${year}"`;
   };
 
   let [positionLeft, setPosition] = useState(-650);
@@ -291,7 +305,10 @@ session.findById("wnd[0]/tbar[0]/btn[3]").press
           type="date"
           id="start"
           name="startDate"
-          onChange={(node) => (startDate = dateStringify(node))}
+          onChange={(node) => (
+            (startDate = dateStringify(node)),
+            (weekDate = dateStringifyWeekNumber(node))
+          )}
         />
         <Input
           type="date"
@@ -316,7 +333,6 @@ session.findById("wnd[0]/tbar[0]/btn[3]").press
       </Div>
       <Img
         onClick={() => {
-          console.log("clicked");
           setPosition(
             positionLeft === -650 ? (positionLeft = 0) : (positionLeft = -650)
           );
@@ -327,4 +343,8 @@ session.findById("wnd[0]/tbar[0]/btn[3]").press
   );
 };
 
-export default Macro;
+const mapDispatchToProps = (dispatch) => ({
+  addWeekNumber: (weekNumber) => dispatch(addWeekNumber(weekNumber)),
+});
+
+export default connect(null, mapDispatchToProps)(Macro);
