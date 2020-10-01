@@ -33,6 +33,7 @@ const dbRequest = (date) => {
     .then((data) => {
       databaseData = data;
       console.log("Success:", data);
+      console.log(databaseData);
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -418,23 +419,33 @@ const DisplayList = ({ OTIF, OPEN }) => {
       ) : null}
       {visibletable === 4 ? (
         <Table left={useStyle4} style={{ height: "80vh" }}>
-          <caption>
-            <p>Database</p>
-            <Button
-              report={databaseData.data.map((item) =>
-                preferedOrder(item, preferredOrderSetup)
-              )}
-              name="DB"
-            ></Button>
-          </caption>
-          <thead>
-            <tr>{generateTableDb(databaseData.data).headers}</tr>
-          </thead>
-          <tbody>
-            {generateTableDb(databaseData.data).tables.map((item, index) => (
-              <tr key={index}>{item}</tr>
-            ))}
-          </tbody>
+          {databaseData.data === undefined ? (
+            <caption>
+              <p>No data to display</p>
+            </caption>
+          ) : (
+            <>
+              <caption>
+                <p>Database</p>
+                <Button
+                  report={databaseData.data.map((item) =>
+                    preferedOrder(item, preferredOrderSetup)
+                  )}
+                  name="DB"
+                ></Button>
+              </caption>
+              <thead>
+                <tr>{generateTableDb(databaseData.data).headers}</tr>
+              </thead>
+              <tbody>
+                {generateTableDb(databaseData.data).tables.map(
+                  (item, index) => (
+                    <tr key={index}>{item}</tr>
+                  )
+                )}
+              </tbody>
+            </>
+          )}
         </Table>
       ) : null}
 
