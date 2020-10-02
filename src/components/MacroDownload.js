@@ -307,7 +307,10 @@ session.findById("wnd[0]/tbar[0]/btn[3]").press
           name="startDate"
           onChange={(node) => (
             (startDate = dateStringify(node)),
-            (weekDate = dateStringifyWeekNumber(node))
+            (weekDate = dateStringifyWeekNumber(node)),
+            props.addWeekNumber(
+              `${currentWeekNumber(weekDate)}-${weekDate.slice(7, 11)}`
+            )
           )}
         />
         <Input

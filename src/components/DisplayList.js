@@ -153,7 +153,12 @@ const DisplayList = ({ OTIF, OPEN }) => {
     for (let i = 0; i < report.length; i++) {
       for (const property in report[i]) {
         table.push(
-          <td style={{ color: `${report[i]["Duplicate"] ? "red" : "black"}` }}>
+          <td
+            onClick={() => {
+              console.log(report[i]);
+            }}
+            style={{ color: `${report[i]["Duplicate"] ? "red" : "black"}` }}
+          >
             {report[i][property]}
           </td>
         );
@@ -235,6 +240,8 @@ const DisplayList = ({ OTIF, OPEN }) => {
 
   let [toggleDuplicate, toggleDuplicateRemove] = useState(false);
 
+  let [toggleSave, saveDb] = useState(false);
+
   const AxiosRequest = (file) => {
     file.map((item) => {
       fetch(`${process.env.REACT_APP_SERVER}/reports`, {
@@ -247,9 +254,11 @@ const DisplayList = ({ OTIF, OPEN }) => {
         .then((response) => response.json())
         .then((data) => {
           console.log("Success:", data);
+          saveDb((toggleSave = true));
         })
         .catch((error) => {
           console.error("Error:", error);
+          saveDb((toggleSave = false));
         });
     });
   };
@@ -593,7 +602,7 @@ const DisplayList = ({ OTIF, OPEN }) => {
               );
             }}
           >
-            Save to Database
+            {toggleSave ? "Saved!" : "Save to Database"}
           </TableButton>
         </div>
       ) : null}
