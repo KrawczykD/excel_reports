@@ -17,12 +17,12 @@ let inputDate;
 //   return local.toJSON().slice(0, 10);
 // };
 
-const dbRequest = (date) => {
+const dbRequest = async (date) => {
   let searchDate = `${currentWeek(date)}-${
     inputDate ? inputDate.slice(6, 10) : new Date().getFullYear()
   }`;
 
-  fetch(`${process.env.REACT_APP_SERVER}/getreports?date=${searchDate}`, {
+  await fetch(`${process.env.REACT_APP_SERVER}/getreports?date=${searchDate}`, {
     method: "GET", // or 'PUT'
     headers: {
       "Content-Type": "application/json",
@@ -311,11 +311,11 @@ const DisplayList = ({ OTIF, OPEN }) => {
         Display OPEN + OTIF
       </TableButton>
       <TableButton
-        onClick={() => (
-          dbRequest(inputDate),
-          setCount(
+        onClick={async () => (
+          await dbRequest(inputDate),
+          await setCount(
             (visibletable = 4),
-            setTimeout(() => {
+            await setTimeout(() => {
               leftChange4((useStyle4 = -window.innerWidth));
               leftChange4((useStyle4 = 0));
             }, 100),
