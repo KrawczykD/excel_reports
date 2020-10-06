@@ -14,6 +14,7 @@ const functionChange = (
   let OPEN = [];
 
   const excelData = (data) => {
+    console.log(data);
     if (typeof data === "string") {
       return data.slice(0, 10).split(".").join("/");
     } else if (typeof data === "number") {
@@ -23,10 +24,11 @@ const functionChange = (
 
       // calculate Excel xxx days later, with local tz offset
       let jsdate = new Date(0, 0, data - 1, 0, -offset, 0);
-
       return `${jsdate.getDate()}/${
         jsdate.getMonth() + 1
       }/${jsdate.getUTCFullYear()}`;
+    } else if (data === undefined || "") {
+      return ``;
     }
   };
 
