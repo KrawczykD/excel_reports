@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "./Button.css";
 import { DateInput as Input } from "./Input.css";
 import { Div, Info, Img } from "./MacroDownload.css";
@@ -302,7 +302,7 @@ session.findById("wnd[0]/tbar[0]/btn[3]").press
 
   return (
     <>
-      <Div left={(positionLeft = positionLeft)}>
+      <Div left={positionLeft}>
         <Input
           type="date"
           id="start"

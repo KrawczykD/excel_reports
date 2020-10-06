@@ -4,29 +4,27 @@ import Buttons from "./Button.css.js";
 
 const ExcelDownloadSeparateButton = ({ customer, file, name, report }) => {
   const separateCustomers = (dataFile, ChoosenReport) => {
-    var data;
-
     //Report Customer = Vendor
 
     switch (report) {
       case "OTIF":
-        return (data = dataFile.filter((item) =>
+        return dataFile.filter((item) =>
           item["Vendor"] === customer && item["report"] === ChoosenReport
             ? item
             : null
-        ));
+        );
 
       case "OPEN":
-        return (data = dataFile.filter((item) =>
+        return dataFile.filter((item) =>
           item["Vendor"] === customer && item["report"] === ChoosenReport
             ? item
             : null
-        ));
+        );
 
       case null:
-        return (data = dataFile.filter((item) =>
+        return dataFile.filter((item) =>
           item["Vendor"] === customer ? item : null
-        ));
+        );
 
       default:
         return [];

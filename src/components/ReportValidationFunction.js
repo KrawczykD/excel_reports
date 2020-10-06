@@ -1,20 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import currentWeekNumber from "current-week-number";
 import addData from "../actions/addDataAction";
 import addWeekNumber from "../actions/addWeekNumberAction";
 import Buttons from "./Button.css";
-const functionChange = (
-  files,
-  addData,
-  addWeekNumberReducer,
-  addWeekNumber
-) => {
+const functionChange = (files, addData, addWeekNumberReducer) => {
   let OTIF = [];
   let OPEN = [];
 
   const excelData = (data) => {
-    console.log(data);
     if (typeof data === "string") {
       return data.slice(0, 10).split(".").join("/");
     } else if (typeof data === "number") {
@@ -82,10 +75,7 @@ const functionChange = (
       (item["Country"] = item["Country ship-to-party"]),
       (item["Cust Requested date"] = item["Ship-to Pur. Order Date"]),
       (item["PO Invoice created"] = item["SD Billing Doc. created"]),
-      (item["Vendor"] = item["Report Customer"]),
-      item["PO Invoice created"] === undefined
-        ? (item["PO Invoice created"] = "")
-        : (item["PO Invoice created"] = item["PO Invoice created"])
+      (item["Vendor"] = item["Report Customer"])
     );
   });
 
@@ -132,10 +122,7 @@ const functionChange = (
       (item["Country"] = item["Country ship-to-party"]),
       (item["Cust Requested date"] = item["Ship-to Pur. Order Date"]),
       (item["PO Invoice created"] = item["SD Billing Doc. created"]),
-      (item["Vendor"] = item["Report Customer"]),
-      item["PO Invoice created"] === undefined
-        ? (item["PO Invoice created"] = "")
-        : (item["PO Invoice created"] = item["PO Invoice created"])
+      (item["Vendor"] = item["Report Customer"])
     );
   });
 

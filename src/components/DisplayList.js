@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import ReportValidationFunction from "./ReportValidationFunction";
 import Table from "./DisplayList.css";
@@ -33,7 +33,6 @@ const dbRequest = async (date) => {
     .then((data) => {
       databaseData = data;
       console.log("Success:", data);
-      console.log(databaseData);
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -260,6 +259,7 @@ const DisplayList = ({ OTIF, OPEN }) => {
           console.error("Error:", error);
           saveDb((toggleSave = false));
         });
+      return 0;
     });
   };
 
