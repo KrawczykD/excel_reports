@@ -80,7 +80,10 @@ const functionChange = (
       (item["Country"] = item["Country ship-to-party"]),
       (item["Cust Requested date"] = item["Ship-to Pur. Order Date"]),
       (item["PO Invoice created"] = item["SD Billing Doc. created"]),
-      (item["Vendor"] = item["Report Customer"])
+      (item["Vendor"] = item["Report Customer"]),
+      item["PO Invoice created"] === undefined
+        ? (item["PO Invoice created"] = "")
+        : (item["PO Invoice created"] = item["PO Invoice created"])
     );
   });
 
@@ -127,7 +130,10 @@ const functionChange = (
       (item["Country"] = item["Country ship-to-party"]),
       (item["Cust Requested date"] = item["Ship-to Pur. Order Date"]),
       (item["PO Invoice created"] = item["SD Billing Doc. created"]),
-      (item["Vendor"] = item["Report Customer"])
+      (item["Vendor"] = item["Report Customer"]),
+      item["PO Invoice created"] === undefined
+        ? (item["PO Invoice created"] = "")
+        : (item["PO Invoice created"] = item["PO Invoice created"])
     );
   });
 
