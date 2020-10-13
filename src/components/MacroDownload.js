@@ -187,8 +187,8 @@ session.findById("wnd[1]/usr/txtENAME-LOW").text = ""
 session.findById("wnd[1]/usr/txtENAME-LOW").setFocus
 session.findById("wnd[1]/usr/txtENAME-LOW").caretPosition = 0
 session.findById("wnd[1]/tbar[0]/btn[8]").press
-session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").setCurrentCell 12,"TEXT"
-session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "12"
+session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").setCurrentCell 13,"TEXT"
+session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "13"
 session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").doubleClickCurrentCell
 session.findById("wnd[0]/tbar[1]/btn[8]").press
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell -1,""
@@ -225,8 +225,8 @@ session.findById("wnd[1]/usr/txtENAME-LOW").text = ""
 session.findById("wnd[1]/usr/txtENAME-LOW").setFocus
 session.findById("wnd[1]/usr/txtENAME-LOW").caretPosition = 0
 session.findById("wnd[1]/tbar[0]/btn[8]").press
-session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").setCurrentCell 13,"TEXT"
-session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "13"
+session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").setCurrentCell 14,"TEXT"
+session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "14"
 session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").doubleClickCurrentCell
 session.findById("wnd[0]/tbar[1]/btn[8]").press
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell -1,"SDBILLINGDATE"
