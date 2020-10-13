@@ -38,7 +38,7 @@ session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").setCurrentCel
 session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "12"
 session.findById("wnd[1]/tbar[0]/btn[2]").press
 session.findById("wnd[0]/usr/ctxtSO_INVSD-LOW").text = ${startDate}
-session.findById("wnd[0]/usr/ctxtSO_INVSD-HIGH").text = ${startEnd}
+session.findById("wnd[0]/usr/ctxtSO_INVSD-HIGH").text = ${endDate}
 session.findById("wnd[0]/usr/ctxtSO_INVPO-LOW").text = ""
 session.findById("wnd[0]/usr/ctxtSO_INVPO-HIGH").text = ""
 session.findById("wnd[0]/usr/ctxtSO_INVPO-HIGH").setFocus
