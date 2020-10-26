@@ -23,6 +23,7 @@ const dbRequest = async (date) => {
   }`;
 
   await fetch(`${process.env.REACT_APP_SERVER}/getreports?date=${searchDate}`, {
+    //await fetch(`${process.env.REACT_APP_SERVER}/getreports/${searchDate}`, {
     method: "GET", // or 'PUT'
     headers: {
       "Content-Type": "application/json",
