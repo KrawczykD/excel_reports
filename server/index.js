@@ -54,37 +54,7 @@ app.post("/reports", (req, res) => {
 });
 
 app.get("/getreports", async (req, res) => {
-  console.log(`parameters : ${req.query.date}`);
   await Record.find({ "WW-YYYY": req.query.date }, (err, reports) => {
-    if (err) {
-      return res.status(400).json({ success: false, error: err });
-    }
-    if (!reports.length) {
-      return res
-        .status(404)
-        .json({ success: false, error: `Reports not found` });
-    }
-    return res.status(200).json({ success: true, data: reports });
-  }).catch((err) => console.log(err));
-});
-
-app.get("/getreports/:date", async (req, res) => {
-  console.log(`parameters : ${req.params.date}`);
-  await Record.find({ "WW-YYYY": req.params.date }, (err, reports) => {
-    if (err) {
-      return res.status(400).json({ success: false, error: err });
-    }
-    if (!reports.length) {
-      return res
-        .status(404)
-        .json({ success: false, error: `Reports not found` });
-    }
-    return res.status(200).json({ success: true, data: reports });
-  }).catch((err) => console.log(err));
-});
-
-app.get("/api", async (req, res) => {
-  await Record.find({ "WW-YYYY": "40-2020" }, (err, reports) => {
     if (err) {
       return res.status(400).json({ success: false, error: err });
     }
