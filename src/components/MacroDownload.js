@@ -30,12 +30,12 @@ session.findById("wnd[0]").maximize
 session.findById("wnd[0]/tbar[0]/okcd").text = "ZSD_KPI_CL"
 session.findById("wnd[0]").sendVKey 0
 session.findById("wnd[0]/tbar[1]/btn[17]").press
-session.findById("wnd[1]/usr/txtENAME-LOW").text = ""
+session.findById("wnd[1]/usr/txtENAME-LOW").text = "KRAWCZYD"
 session.findById("wnd[1]/usr/txtENAME-LOW").setFocus
 session.findById("wnd[1]/usr/txtENAME-LOW").caretPosition = 0
 session.findById("wnd[1]/tbar[0]/btn[8]").press
-session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").setCurrentCell 12,"TEXT"
-session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "12"
+session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").setCurrentCell 0,"TEXT"
+session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "0"
 session.findById("wnd[1]/tbar[0]/btn[2]").press
 session.findById("wnd[0]/usr/ctxtSO_INVPO-LOW").text = ""
 session.findById("wnd[0]/usr/ctxtSO_INVPO-HIGH").text = ""
@@ -113,12 +113,12 @@ session.findById("wnd[0]").maximize
 session.findById("wnd[0]/tbar[0]/okcd").text = "ZSD_KPI_CL"
 session.findById("wnd[0]").sendVKey 0
 session.findById("wnd[0]/tbar[1]/btn[17]").press
-session.findById("wnd[1]/usr/txtENAME-LOW").text = ""
+session.findById("wnd[1]/usr/txtENAME-LOW").text = "KRAWCZYD"
 session.findById("wnd[1]/usr/txtENAME-LOW").setFocus
 session.findById("wnd[1]/usr/txtENAME-LOW").caretPosition = 0
 session.findById("wnd[1]/tbar[0]/btn[8]").press
-session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").setCurrentCell 10,"TEXT"
-session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "10"
+session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").setCurrentCell 1,"TEXT"
+session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "1"
 session.findById("wnd[1]/tbar[0]/btn[2]").press
 session.findById("wnd[0]/usr/ctxtSO_INVSD-LOW").text = ${startDate}
 session.findById("wnd[0]/usr/ctxtSO_INVSD-HIGH").text = ${endDate}
@@ -185,12 +185,12 @@ session.findById("wnd[0]").maximize
 session.findById("wnd[0]/tbar[0]/okcd").text = "ZSD_KPI_CL"
 session.findById("wnd[0]").sendVKey 0
 session.findById("wnd[0]/tbar[1]/btn[17]").press
-session.findById("wnd[1]/usr/txtENAME-LOW").text = ""
+session.findById("wnd[1]/usr/txtENAME-LOW").text = "KRAWCZYD"
 session.findById("wnd[1]/usr/txtENAME-LOW").setFocus
 session.findById("wnd[1]/usr/txtENAME-LOW").caretPosition = 0
 session.findById("wnd[1]/tbar[0]/btn[8]").press
-session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").setCurrentCell 13,"TEXT"
-session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "13"
+session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").setCurrentCell 3,"TEXT"
+session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "3"
 session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").doubleClickCurrentCell
 session.findById("wnd[0]/tbar[1]/btn[8]").press
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell -1,""
@@ -223,12 +223,12 @@ session.findById("wnd[0]").maximize
 session.findById("wnd[0]/tbar[0]/okcd").text = "ZSD_KPI_CL"
 session.findById("wnd[0]").sendVKey 0
 session.findById("wnd[0]/tbar[1]/btn[17]").press
-session.findById("wnd[1]/usr/txtENAME-LOW").text = ""
+session.findById("wnd[1]/usr/txtENAME-LOW").text = "KRAWCZYD"
 session.findById("wnd[1]/usr/txtENAME-LOW").setFocus
 session.findById("wnd[1]/usr/txtENAME-LOW").caretPosition = 0
 session.findById("wnd[1]/tbar[0]/btn[8]").press
-session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").setCurrentCell 14,"TEXT"
-session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "14"
+session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").setCurrentCell 4,"TEXT"
+session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "4"
 session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").doubleClickCurrentCell
 session.findById("wnd[0]/tbar[1]/btn[8]").press
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell -1,"SDBILLINGDATE"
