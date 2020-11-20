@@ -2,7 +2,13 @@ import React from "react";
 import exportFromJSON from "export-from-json";
 import Buttons from "./Button.css.js";
 
-const ExcelDownloadSeparateButton = ({ customer, file, name, report }) => {
+const ExcelDownloadSeparateButton = ({
+  customer,
+  file,
+  name,
+  report,
+  variant,
+}) => {
   const separateCustomers = (dataFile, ChoosenReport) => {
     //Report Customer = Vendor
 
@@ -32,11 +38,14 @@ const ExcelDownloadSeparateButton = ({ customer, file, name, report }) => {
   };
 
   const handleDownloadExcel = () => {
-    const date = new Date().toLocaleDateString();
-    const data = separateCustomers(file, report);
-    const fileName = `${customer}_${report ? report : "COMBINED"}_${date}`;
-    const exportType = "csv";
-    exportFromJSON({ data, fileName, exportType });
+    console.log(report);
+    if (report !== undefined) {
+      const date = new Date().toLocaleDateString();
+      const data = separateCustomers(file, report);
+      const fileName = `${customer}_${report ? report : "COMBINED"}_${date}`;
+      const exportType = "csv";
+      exportFromJSON({ data, fileName, exportType });
+    } else return null;
   };
 
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import exportFromJSON from "export-from-json";
 import Buttons from "./Button.css.js";
 
-const Button = ({ report, name }) => {
+const Button = ({ report, name, buttonName }) => {
   const handleDownloadExcel = () => {
     const date = new Date().toLocaleDateString();
     const data = report;
@@ -18,7 +18,7 @@ const Button = ({ report, name }) => {
           handleDownloadExcel(report);
         }}
       >
-        Download CSV File
+        {buttonName}
       </Buttons>
     </>
   );

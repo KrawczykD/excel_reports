@@ -153,7 +153,9 @@ class ExcelLoad extends Component {
     if (this.state.file.name !== undefined) {
       if (
         this.state.file.name.slice(0, 8) ===
-        `${this.state.customer}_${this.state.report}`
+          `${this.state.customer}_${this.state.report}` ||
+        this.state.file.name.slice(0, 13) ===
+          `${this.state.customer}_${this.state.report}`
       ) {
         this.props.changeWarningState(false);
         this.setState({
@@ -219,6 +221,9 @@ class ExcelLoad extends Component {
           <option value="CLS">CLS</option>
           <option value="JBL">JBL</option>
           <option value="STK">STK</option>
+          <option value="CUST_CLS">CUST_CLS</option>
+          <option value="CUST_JBL">CUST_JBL</option>
+          <option value="CUST_STK">CUST_STK</option>
         </Select>
 
         <Label color={this.state.success} htmlFor="submit">

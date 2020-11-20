@@ -41,9 +41,23 @@ session.findById("wnd[0]/usr/ctxtSO_INVPO-LOW").text = ""
 session.findById("wnd[0]/usr/ctxtSO_INVPO-HIGH").text = ""
 session.findById("wnd[0]/usr/ctxtSO_SHRD-LOW").text = ${startDate}
 session.findById("wnd[0]/usr/ctxtSO_SHRD-HIGH").text = ${endDate}
+session.findById("wnd[0]/usr/ctxtSO_INVPO-HIGH").setFocus
+session.findById("wnd[0]/usr/ctxtSO_INVPO-HIGH").caretPosition = 10
 session.findById("wnd[0]/tbar[1]/btn[8]").press
-session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell -1,""
-session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectAll
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EBELN"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EBELP"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "VBELN"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "POSNR"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MATNR"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "ARKTX"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WECOUNTRY"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KUNNR"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "AGNAME1"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "SDITEMSHIPTORD"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "POCONFIRMED_FIRSTDELIV"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "POQUANTITY"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "POINVQTY"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "FLIEF_NAME"
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").contextMenu
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectContextMenuItem "&XXL"
 session.findById("wnd[1]/tbar[0]/btn[0]").press
@@ -57,8 +71,20 @@ session.findById("wnd[0]/usr/ctxtP_LAYOUT").setFocus
 session.findById("wnd[0]/usr/ctxtP_LAYOUT").caretPosition = 12
 session.findById("wnd[0]").sendVKey 0
 session.findById("wnd[0]/tbar[1]/btn[8]").press
-session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell -1,""
-session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectAll
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EBELN"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EBELP"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "VBELN"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "POSNR"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MATNR"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "ARKTX"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WECOUNTRY"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KUNNR"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "AGNAME1"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "SDITEMSHIPTORD"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "POCONFIRMED_FIRSTDELIV"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "POQUANTITY"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "POINVQTY"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "FLIEF_NAME"
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").contextMenu
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectContextMenuItem "&XXL"
 session.findById("wnd[1]/tbar[0]/btn[0]").press
@@ -98,9 +124,25 @@ session.findById("wnd[0]/usr/ctxtSO_INVSD-LOW").text = ${startDate}
 session.findById("wnd[0]/usr/ctxtSO_INVSD-HIGH").text = ${endDate}
 session.findById("wnd[0]/usr/ctxtSO_INVPO-LOW").text = ""
 session.findById("wnd[0]/usr/ctxtSO_INVPO-HIGH").text = ""
+session.findById("wnd[0]/usr/ctxtSO_INVPO-HIGH").setFocus
+session.findById("wnd[0]/usr/ctxtSO_INVPO-HIGH").caretPosition = 10
 session.findById("wnd[0]/tbar[1]/btn[8]").press
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell -1,""
-session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectAll
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EBELN"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EBELP"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "VBELN"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "POSNR"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MATNR"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "ARKTX"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WECOUNTRY"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KUNNR"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "AGNAME1"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "POQUANTITY"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "POINVQTY"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "SDITEMSHIPTORD"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "POCONFIRMED_FIRSTDELIV"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "SDBILLDATE"
+session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "FLIEF_NAME"
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").contextMenu
 session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectContextMenuItem "&XXL"
 session.findById("wnd[1]/tbar[0]/btn[0]").press
@@ -205,100 +247,6 @@ session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectContextMenuItem "
 session.findById("wnd[1]/tbar[0]/btn[0]").press
 session.findById("wnd[1]/usr/ctxtDY_PATH").text = ${path}
 session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = "STK_OTIF.XLSX"
-session.findById("wnd[1]/usr/ctxtDY_FILENAME").caretPosition = 13
-session.findById("wnd[1]/tbar[0]/btn[0]").press
-session.findById("wnd[0]/tbar[0]/btn[3]").press
-session.findById("wnd[0]/tbar[0]/btn[3]").press
-
-If Not IsObject(application) Then
-Set SapGuiAuto  = GetObject("SAPGUI")
-Set application = SapGuiAuto.GetScriptingEngine
-End If
-If Not IsObject(connection) Then
-Set connection = application.Children(0)
-End If
-If Not IsObject(session) Then
-Set session    = connection.Children(0)
-End If
-If IsObject(WScript) Then
-WScript.ConnectObject session,     "on"
-WScript.ConnectObject application, "on"
-End If
-session.findById("wnd[0]").maximize
-session.findById("wnd[0]/tbar[0]/okcd").text = "ZSD_KPI_CL"
-session.findById("wnd[0]").sendVKey 0
-session.findById("wnd[0]/tbar[1]/btn[17]").press
-session.findById("wnd[1]/usr/txtENAME-LOW").text = "KRAWCZYD"
-session.findById("wnd[1]/usr/txtENAME-LOW").setFocus
-session.findById("wnd[1]/usr/txtENAME-LOW").caretPosition = 0
-session.findById("wnd[1]/tbar[0]/btn[8]").press
-session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").setCurrentCell 5,"TEXT"
-session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "5"
-session.findById("wnd[1]/tbar[0]/btn[2]").press
-session.findById("wnd[0]/usr/ctxtSO_SHRD-LOW").text = ${startDate}
-session.findById("wnd[0]/usr/ctxtSO_SHRD-HIGH").text = ${endDate}
-session.findById("wnd[0]/tbar[1]/btn[8]").press
-session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell -1,""
-session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectAll
-session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").contextMenu
-session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectContextMenuItem "&XXL"
-session.findById("wnd[1]/tbar[0]/btn[0]").press
-session.findById("wnd[1]/usr/ctxtDY_PATH").text = ${path}
-session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = "CUST_STK_OTIF.XLSX"
-session.findById("wnd[1]/usr/ctxtDY_FILENAME").caretPosition = 13
-session.findById("wnd[1]/tbar[0]/btn[0]").press
-session.findById("wnd[0]/tbar[0]/btn[3]").press
-session.findById("wnd[0]/tbar[0]/btn[3]").press
-
-If Not IsObject(application) Then
-Set SapGuiAuto  = GetObject("SAPGUI")
-Set application = SapGuiAuto.GetScriptingEngine
-End If
-If Not IsObject(connection) Then
-Set connection = application.Children(0)
-End If
-If Not IsObject(session) Then
-Set session    = connection.Children(0)
-End If
-If IsObject(WScript) Then
-WScript.ConnectObject session,     "on"
-WScript.ConnectObject application, "on"
-End If
-session.findById("wnd[0]").maximize
-session.findById("wnd[0]/tbar[0]/okcd").text = "ZSD_KPI_CL"
-session.findById("wnd[0]").sendVKey 0
-session.findById("wnd[0]/tbar[1]/btn[17]").press
-session.findById("wnd[1]/usr/txtENAME-LOW").text = "KRAWCZYD"
-session.findById("wnd[1]/usr/txtENAME-LOW").setFocus
-session.findById("wnd[1]/usr/txtENAME-LOW").caretPosition = 0
-session.findById("wnd[1]/tbar[0]/btn[8]").press
-session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").setCurrentCell 2,"TEXT"
-session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "2"
-session.findById("wnd[1]/tbar[0]/btn[2]").press
-session.findById("wnd[0]/usr/ctxtSO_SHRD-LOW").text = ${startDate}
-session.findById("wnd[0]/usr/ctxtSO_SHRD-HIGH").text = ${endDate}
-session.findById("wnd[0]/tbar[1]/btn[8]").press
-session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell -1,""
-session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectAll
-session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").contextMenu
-session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectContextMenuItem "&XXL"
-session.findById("wnd[1]/tbar[0]/btn[0]").press
-session.findById("wnd[1]/usr/ctxtDY_PATH").text = ${path}
-session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = "CUST_CLS_OTIF.XLSX"
-session.findById("wnd[1]/usr/ctxtDY_FILENAME").caretPosition = 13
-session.findById("wnd[1]/tbar[0]/btn[0]").press
-session.findById("wnd[0]/tbar[0]/btn[3]").press
-session.findById("wnd[0]/usr/ctxtP_LAYOUT").text = "/UK JBL COTD"
-session.findById("wnd[0]/usr/ctxtP_LAYOUT").setFocus
-session.findById("wnd[0]/usr/ctxtP_LAYOUT").caretPosition = 12
-session.findById("wnd[0]/tbar[1]/btn[8]").press
-session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell -1,""
-session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectAll
-session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").contextMenu
-session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectContextMenuItem "&XXL"
-session.findById("wnd[1]/tbar[0]/btn[0]").press
-session.findById("wnd[1]/usr/ctxtDY_PATH").text = ${path}
-session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = "CUST_JBL_OTIF.XLSX"
 session.findById("wnd[1]/usr/ctxtDY_FILENAME").caretPosition = 13
 session.findById("wnd[1]/tbar[0]/btn[0]").press
 session.findById("wnd[0]/tbar[0]/btn[3]").press

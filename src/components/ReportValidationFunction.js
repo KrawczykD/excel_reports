@@ -33,20 +33,25 @@ const functionChange = (files, addData, addWeekNumberReducer) => {
 
   OTIF.map((item) => {
     return (
-      item["Report Customer"] === "STK"
+      item["Report Customer"] === "STK" ||
+      item["Report Customer"] === "CUST_STK"
         ? (item["Country ship-to-party"] = item["Country sold-to-party"])
         : null,
-      item["Report Customer"] === "STK"
+      item["Report Customer"] === "STK" ||
+      item["Report Customer"] === "CUST_STK"
         ? (item["PO Quantity"] = item["SD Quantity"])
         : null,
-      item["Report Customer"] === "STK"
+      item["Report Customer"] === "STK" ||
+      item["Report Customer"] === "CUST_STK"
         ? (item["PO Invoice Quantity"] = item["Billed Quantity"])
         : null,
-      item["Report Customer"] === "STK"
+      item["Report Customer"] === "STK" ||
+      item["Report Customer"] === "CUST_STK"
         ? (item["PO first commited delivery date"] =
             item["Deliv.date last confirm."])
         : null,
-      item["Report Customer"] === "STK"
+      item["Report Customer"] === "STK" ||
+      item["Report Customer"] === "CUST_STK"
         ? (item["SD Billing Doc. created"] = item["Billing Date"])
         : null,
       (item.Product = item["Material"].slice(0, 4)),
@@ -81,20 +86,25 @@ const functionChange = (files, addData, addWeekNumberReducer) => {
 
   OPEN.map((item) => {
     return (
-      item["Report Customer"] === "STK"
+      item["Report Customer"] === "STK" ||
+      item["Report Customer"] === "CUST_STK"
         ? (item["Country ship-to-party"] = item["Country sold-to-party"])
         : null,
-      item["Report Customer"] === "STK"
+      item["Report Customer"] === "STK" ||
+      item["Report Customer"] === "CUST_STK"
         ? (item["PO Quantity"] = item["SD Quantity"])
         : null,
-      item["Report Customer"] === "STK"
+      item["Report Customer"] === "STK" ||
+      item["Report Customer"] === "CUST_STK"
         ? (item["PO Invoice Quantity"] = item["Billed Quantity"])
         : null,
-      item["Report Customer"] === "STK"
+      item["Report Customer"] === "STK" ||
+      item["Report Customer"] === "CUST_STK"
         ? (item["PO first commited delivery date"] =
             item["Deliv.date last confirm."])
         : null,
-      item["Report Customer"] === "STK"
+      item["Report Customer"] === "STK" ||
+      item["Report Customer"] === "CUST_STK"
         ? (item["SD Billing Doc. created"] = item["Billing Date"])
         : null,
       (item.Product = item["Material"].slice(0, 4)),
@@ -137,7 +147,7 @@ const reportValidationFunction = ({
   return (
     <>
       <Buttons
-        style={{ position: "absolute", bottom: "20px", right: "0" }}
+        // style={{ position: "absolute", bottom: "20px", right: "0" }}
         onClick={() => {
           functionChange(files, addData, addWeekNumberReducer, addWeekNumber);
         }}

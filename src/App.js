@@ -20,7 +20,7 @@ function App({ warningState }) {
       <ContainerDiv>
         <ExcelLoads></ExcelLoads>
         <DisplayList></DisplayList>
-        <MacroDownload buttonText="Download macro for SAP"></MacroDownload>
+        {/* <MacroDownload buttonText="Download macro for SAP"></MacroDownload> */}
         <Footer></Footer>
       </ContainerDiv>
       {warningState ? (

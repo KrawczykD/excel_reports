@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Button from "./Button.css";
 import { DateInput as Input } from "./Input.css";
-import { Div, Info, Img } from "./MacroDownload.css";
+import { Div, Info, Img } from "./MacroDownload.cssCopy3";
 import sap from "../assets/images/sap.png";
 import { connect } from "react-redux";
 import addWeekNumber from "../actions/addWeekNumberAction";
 import currentWeekNumber from "current-week-number";
+import ButtonHead from "./DownloadExcelButton";
 
 const Macro = (props) => {
   // let path = `"C:\\reports\\${currentWeekNumber()}"`
@@ -352,11 +353,10 @@ session.findById("wnd[0]/tbar[0]/btn[3]").press
     return `"${month}/${day}/${year}"`;
   };
 
-  let [positionLeft, setPosition] = useState(-650);
-
   return (
     <>
-      <Div left={positionLeft}>
+      <Div>
+        <ButtonHead buttonName="SAP"></ButtonHead>
         <Input
           type="date"
           id="start"
@@ -390,14 +390,6 @@ session.findById("wnd[0]/tbar[0]/btn[3]").press
           All reports You can find in c:\reports
         </Info>
       </Div>
-      <Img
-        onClick={() => {
-          setPosition(
-            positionLeft === -650 ? (positionLeft = 0) : (positionLeft = -650)
-          );
-        }}
-        src={sap}
-      ></Img>
     </>
   );
 };

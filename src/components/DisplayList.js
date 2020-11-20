@@ -7,15 +7,28 @@ import TableButton from "./Button.css";
 import ExcelDownloadSeparateButton from "./ExcelDownloadSeparateButton";
 import currentWeek from "current-week-number";
 import { DateInput as Input } from "./Input.css";
+import DownloadVariants from "./DownloadVariants.css";
+import FunctionButtons from "./FunctionButtons.css";
+import MacroDownload from "./MacroDownloadCopy3";
 
 let databaseData;
 let inputDate;
 
-// Date.prototype.toDateInputValue = function () {
-//   var local = new Date(this);
-//   local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-//   return local.toJSON().slice(0, 10);
-// };
+let buttonsVariants = [
+  { name: "Variants for download" },
+  { name: "CELESTICA OPEN + OTIF", report: null, customer: "CLS" },
+  { name: "JABIL OPEN + OTIF", report: null, customer: "JBL" },
+  { name: "STOCKPORT OPEN + OTIF", report: null, customer: "STK" },
+  { name: "CUST CELESTICA OTIF", report: null, customer: "CUST_CLS" },
+  { name: "CELESTICA OPEN", report: "OPEN", customer: "CLS" },
+  { name: "JABIL OPEN", report: "OPEN", customer: "JBL" },
+  { name: "STOCKPORT OPEN", report: "OPEN", customer: "STK" },
+  { name: "CUST JABIL OTIF", report: null, customer: "CUST_JBL" },
+  { name: "CELESTICA OTIF", report: "OTIF", customer: "CLS" },
+  { name: "JABIL OTIF", report: "OTIF", customer: "JBL" },
+  { name: "STOCKPORT OTIF", report: "OTIF", customer: "STK" },
+  { name: "CUST STOCKPORT OTIF", report: null, customer: "CUST_STK" },
+];
 
 const dbRequest = async (date) => {
   let searchDate = `${currentWeek(date)}-${
@@ -23,8 +36,7 @@ const dbRequest = async (date) => {
   }`;
 
   await fetch(`${process.env.REACT_APP_SERVER}/getreports?date=${searchDate}`, {
-    //await fetch(`${process.env.REACT_APP_SERVER}/getreports/${searchDate}`, {
-    method: "GET", // or 'PUT'
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
@@ -49,6 +61,8 @@ const dateStringify = (date) => {
 };
 
 dbRequest();
+
+//here you can controll what field display
 
 const DisplayList = ({ OTIF, OPEN }) => {
   const preferredOrderSetup = [
@@ -102,18 +116,14 @@ const DisplayList = ({ OTIF, OPEN }) => {
     "SO + Line",
     "Material",
     "Description",
-    // "Country ship-to-party",
     "Country",
     "Customer",
     "Sold-to party name",
     "PO Quantity",
     "PO Invoice Quantity",
-    // "Ship-to Pur. Order Date",
     "Cust Requested date",
     "PO first commited delivery date",
-    // "SD Billing Doc. created",
     "PO Invoice created",
-    // "Report Customer",
     "Vendor",
     "Physical delivery date (CLS&JBL)",
     "Physical delivery date",
@@ -138,8 +148,6 @@ const DisplayList = ({ OTIF, OPEN }) => {
 
   OTIF = OTIF.map((item) => preferedOrder(item, preferredOrderSetup));
   OPEN = OPEN.map((item) => preferedOrder(item, preferredOrderSetup));
-
-  //here you can controll what field display
 
   const generateTable = (report) => {
     let headers = [];
@@ -351,6 +359,7 @@ const DisplayList = ({ OTIF, OPEN }) => {
           <caption>
             <p>Weekly OTIF report</p>
             <Button
+              buttonName="Download CSV File"
               report={OTIF.map((item) =>
                 preferedOrder(item, preferredOrderSetup)
               )}
@@ -372,6 +381,7 @@ const DisplayList = ({ OTIF, OPEN }) => {
           <caption>
             <p>Weekly OPEN OTIF report</p>
             <Button
+              buttonName="Download CSV File"
               report={OPEN.map((item) =>
                 preferedOrder(item, preferredOrderSetup)
               )}
@@ -401,6 +411,7 @@ const DisplayList = ({ OTIF, OPEN }) => {
                   } Duplicates Added`}
             </p>
             <Button
+              buttonName="Download CSV File"
               report={
                 toggleDuplicate
                   ? duplicateRemove(OPEN, OTIF).map((item) =>
@@ -438,6 +449,7 @@ const DisplayList = ({ OTIF, OPEN }) => {
               <caption>
                 <p>Database</p>
                 <Button
+                  buttonName="Download CSV File"
                   report={databaseData.data.map((item) =>
                     preferedOrder(item, preferredOrderSetup)
                   )}
@@ -460,152 +472,48 @@ const DisplayList = ({ OTIF, OPEN }) => {
       ) : null}
 
       {visibletable !== 4 ? (
-        <div>
-          <ExcelDownloadSeparateButton
-            name={"Celestica OPEN + OTIF"}
-            report={null}
-            customer={"CLS"}
-            file={
-              toggleDuplicate
-                ? duplicateRemove(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-                : duplicateCheck(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-            }
-          ></ExcelDownloadSeparateButton>
-          <ExcelDownloadSeparateButton
-            name={"JABIL OPEN + OTIF"}
-            report={null}
-            customer={"JBL"}
-            file={
-              toggleDuplicate
-                ? duplicateRemove(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-                : duplicateCheck(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-            }
-          ></ExcelDownloadSeparateButton>
-          <ExcelDownloadSeparateButton
-            name={"STOCKPORT OPEN + OTIF"}
-            report={null}
-            customer={"STK"}
-            file={
-              toggleDuplicate
-                ? duplicateRemove(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-                : duplicateCheck(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-            }
-          ></ExcelDownloadSeparateButton>
-          <br></br>
-          <ExcelDownloadSeparateButton
-            name={"Celestica OTIF"}
-            customer={"CLS"}
-            report={"OTIF"}
-            file={
-              toggleDuplicate
-                ? duplicateRemove(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-                : duplicateCheck(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-            }
-          ></ExcelDownloadSeparateButton>
-          <ExcelDownloadSeparateButton
-            name={"JABIL OTIF"}
-            customer={"JBL"}
-            report={"OTIF"}
-            file={
-              toggleDuplicate
-                ? duplicateRemove(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-                : duplicateCheck(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-            }
-          ></ExcelDownloadSeparateButton>
-          <ExcelDownloadSeparateButton
-            name={"STOCKPORT OTIF"}
-            customer={"STK"}
-            report={"OTIF"}
-            file={
-              toggleDuplicate
-                ? duplicateRemove(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-                : duplicateCheck(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-            }
-          ></ExcelDownloadSeparateButton>
-          <br></br>
-          <ExcelDownloadSeparateButton
-            name={"Celestica OPEN"}
-            customer={"CLS"}
-            report={"OPEN"}
-            file={
-              toggleDuplicate
-                ? duplicateRemove(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-                : duplicateCheck(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-            }
-          ></ExcelDownloadSeparateButton>
-          <ExcelDownloadSeparateButton
-            name={"JABIL OPEN"}
-            customer={"JBL"}
-            report={"OPEN"}
-            file={
-              toggleDuplicate
-                ? duplicateRemove(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-                : duplicateCheck(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-            }
-          ></ExcelDownloadSeparateButton>
-          <ExcelDownloadSeparateButton
-            name={"STOCKPORT OPEN"}
-            customer={"STK"}
-            report={"OPEN"}
-            file={
-              toggleDuplicate
-                ? duplicateRemove(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-                : duplicateCheck(OPEN, OTIF).map((item) =>
-                    preferedOrder(item, preferredOrderSetup)
-                  )
-            }
-          ></ExcelDownloadSeparateButton>
-          <ReportValidationFunction></ReportValidationFunction>
-          <TableButton
-            onClick={() => {
-              AxiosRequest(
-                toggleDuplicate
-                  ? duplicateRemove(OPEN, OTIF).map((item) =>
-                      preferedOrder(item, preferredOrderSetup)
-                    )
-                  : duplicateCheck(OPEN, OTIF).map((item) =>
-                      preferedOrder(item, preferredOrderSetup)
-                    )
-              );
-            }}
-          >
-            {toggleSave ? "Saved!" : "Save to Database"}
-          </TableButton>
-        </div>
+        <>
+          <FunctionButtons>
+            <TableButton
+              onClick={() => {
+                AxiosRequest(
+                  toggleDuplicate
+                    ? duplicateRemove(OPEN, OTIF).map((item) =>
+                        preferedOrder(item, preferredOrderSetup)
+                      )
+                    : duplicateCheck(OPEN, OTIF).map((item) =>
+                        preferedOrder(item, preferredOrderSetup)
+                      )
+                );
+              }}
+            >
+              {toggleSave ? "Saved!" : "Save to Database"}
+            </TableButton>
+            <ReportValidationFunction></ReportValidationFunction>
+          </FunctionButtons>
+
+          <DownloadVariants>
+            {buttonsVariants.map((variant) => (
+              <li>
+                <ExcelDownloadSeparateButton
+                  name={variant.name}
+                  report={variant.report}
+                  customer={variant.customer}
+                  file={
+                    toggleDuplicate
+                      ? duplicateRemove(OPEN, OTIF).map((item) =>
+                          preferedOrder(item, preferredOrderSetup)
+                        )
+                      : duplicateCheck(OPEN, OTIF).map((item) =>
+                          preferedOrder(item, preferredOrderSetup)
+                        )
+                  }
+                ></ExcelDownloadSeparateButton>
+              </li>
+            ))}
+          </DownloadVariants>
+          <MacroDownload buttonText="Download macro for SAP"></MacroDownload>
+        </>
       ) : null}
     </div>
   );
