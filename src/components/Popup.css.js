@@ -1,29 +1,43 @@
 import styled from "styled-components";
 
 export const PopupDiv = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  max-height: 42px;
+  overflow: hidden;
+  transition: all 2s 0.5s;
+  background-color: white;
+
   position: absolute;
-  top: 200px;
-  left: ${(props) => props.displayPopup}px;
-  opacity: ${(props) => props.displayPopupOpacity};
-  width: 350px;
-  background-color: #28a745;
-  border-radius: 10rem;
-  z-index: 9999;
+  bottom: 20px;
+  left: 665px;
 
-  transition: opacity 1s linear, left 1s ease-out;
-
-  & > p {
-    color: #ffffff;
-    text-align: center;
+  &:hover {
+    max-height: 1000px;
+    background-color: #7ab800;
+    transition: all 2s 0.5s;
+  }
+  & > button {
+    //   margin: 0 auto;
+    background-color: ${(props) => `#${props.color}`};
+    //   border: none;
+      padding-left: ${(props) => `${props.shake}rem`};
+      
   }
 
   & > ul {
     list-style: none;
-    padding: 0;
+    // padding: 0;
+    text-aligne: center;
   }
 
   & > ul > li {
-    padding: 0.5rem 5rem;
-    color: #ffffff;
+    padding: .1rem;
+  font-size 1.5rem;
+  color:white;
+  }
+
+  @media (max-width: 768px) {
+    max-height: 25px;
   }
 `;

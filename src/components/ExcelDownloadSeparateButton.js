@@ -38,7 +38,6 @@ const ExcelDownloadSeparateButton = ({
   };
 
   const handleDownloadExcel = () => {
-    console.log(report);
     if (report !== undefined) {
       const date = new Date().toLocaleDateString();
       const data = separateCustomers(file, report);

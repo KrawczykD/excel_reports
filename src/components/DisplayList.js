@@ -9,7 +9,8 @@ import currentWeek from "current-week-number";
 import { DateInput as Input } from "./Input.css";
 import DownloadVariants from "./DownloadVariants.css";
 import FunctionButtons from "./FunctionButtons.css";
-import MacroDownload from "./MacroDownloadCopy3";
+import MacroDownload from "./MacroDownload";
+import Popup from "./Popup.js";
 
 let databaseData;
 let inputDate;
@@ -513,6 +514,7 @@ const DisplayList = ({ OTIF, OPEN }) => {
             ))}
           </DownloadVariants>
           <MacroDownload buttonText="Download macro for SAP"></MacroDownload>
+          <Popup></Popup>
         </>
       ) : null}
     </div>

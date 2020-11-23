@@ -3,9 +3,9 @@ import XLSX from "xlsx";
 import { connect } from "react-redux";
 import addFile from "../actions/addFileActions";
 import changeWarningState from "../actions/changeWarningStateAction";
+import addCustomer from "../actions/loadedCustomersActions";
 import { Input, Label } from "./Input.css.js";
 import Select from "./Select.css.js";
-import Popup from "./Popup.js";
 
 import logo from "../assets/images/landisgyr_logo.png";
 
@@ -130,24 +130,24 @@ class ExcelLoad extends Component {
     }
   };
 
-  popup = () => {
-    this.setState({
-      displayPopup: 0,
-      displayPopupOpacity: 0.8,
-    });
+  // popup = () => {
+  //   this.setState({
+  //     displayPopup: 0,
+  //     displayPopupOpacity: 0.8,
+  //   });
 
-    setTimeout(() => {
-      this.setState({
-        displayPopup: -500,
-      });
-    }, 4000);
+  //   setTimeout(() => {
+  //     this.setState({
+  //       displayPopup: -500,
+  //     });
+  //   }, 4000);
 
-    setTimeout(() => {
-      this.setState({
-        displayPopupOpacity: 0,
-      });
-    }, 3000);
-  };
+  //   setTimeout(() => {
+  //     this.setState({
+  //       displayPopupOpacity: 0,
+  //     });
+  //   }, 3000);
+  // };
 
   checkReport = () => {
     if (this.state.file.name !== undefined) {
@@ -158,13 +158,14 @@ class ExcelLoad extends Component {
           `${this.state.customer}_${this.state.report}`
       ) {
         this.props.changeWarningState(false);
+        this.props.addCustomer(`${this.state.customer} ${this.state.report}`);
         this.setState({
           loadedCustomer: [
             ...this.state.loadedCustomer,
             `${this.state.customer} ${this.state.report} `,
           ],
         });
-        this.popup();
+        // this.popup();
         return this.handleFile();
       } else {
         this.props.changeWarningState(true);
@@ -179,11 +180,11 @@ class ExcelLoad extends Component {
   render() {
     return (
       <div>
-        <Popup
+        {/* <Popup
           displayPopupOpacity={this.state.displayPopupOpacity}
           displayPopup={this.state.displayPopup}
           items={this.state.loadedCustomer}
-        ></Popup>
+        ></Popup> */}
         <a
           href="https://landisgyr.sharepoint.com/sites/intranet/"
           title="Landis+Gyr website"
@@ -246,6 +247,7 @@ class ExcelLoad extends Component {
 const mapDispatchToProps = (dispatch) => ({
   addFile: (data) => dispatch(addFile(data)),
   changeWarningState: (state) => dispatch(changeWarningState(state)),
+  addCustomer: (state) => dispatch(addCustomer(state)),
 });
 
 export default connect(null, mapDispatchToProps)(ExcelLoad);

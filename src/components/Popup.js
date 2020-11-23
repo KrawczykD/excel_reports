@@ -1,18 +1,40 @@
 import React from "react";
 import { PopupDiv } from "./Popup.css";
+import ButtonHead from "./DownloadExcelButton";
+import { connect } from "react-redux";
+import { useState, useEffect, useReducer } from "react";
 
-const Popup = (props) => {
-  let list = props.items.map((item, index) => <li key={index}>{item}</li>);
+const Popup = ({ loadedCustomers }) => {
+  let list = loadedCustomers.map((item, index) => <li key={index}>{item}</li>);
+
+  let [shake, setCount] = useState(0.7);
+  let [color, setColor] = useState("FFFFFF");
+
+  useEffect(() => {
+    if (list.length !== 0) {
+      setCount((shake = 3));
+      setColor((color = "7AB800"));
+
+      setTimeout(() => {
+        setCount((shake = 0));
+      }, 100);
+      setTimeout(() => {
+        setCount((shake = 0.7));
+        setColor((color = "FFFFFF"));
+      }, 300);
+    }
+  }, [loadedCustomers]);
 
   return (
-    <PopupDiv
-      displayPopupOpacity={props.displayPopupOpacity}
-      displayPopup={props.displayPopup}
-    >
-      <p>Uploaded Sucesfully {list.length} Reports</p>
-      <ul>{list}</ul>
+    <PopupDiv shake={shake} color={color}>
+      <ButtonHead buttonName={`Loaded Reports ${list.length}`}></ButtonHead>
+      <ul>{list.length === 0 ? <li>Please load report</li> : list}</ul>
     </PopupDiv>
   );
 };
 
-export default Popup;
+const mapStateToProps = (state) => ({
+  loadedCustomers: state.loadedCustomersReducer,
+});
+
+export default connect(mapStateToProps)(Popup);

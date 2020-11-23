@@ -1,55 +1,38 @@
 import styled from "styled-components";
 
 export const Div = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  max-height: 42px;
+  overflow: hidden;
+  transition: all 2s 0.5s;
+  background-color: white;
+
   position: absolute;
-  bottom: 0;
-  left: ${(props) => props.left}px;
-  // height:600px;
-  width: 600px;
-  border: 0.1rem solid white;
-  // border-radius: 1rem;
-  background-color: ${(props) => props.theme.main.color};
-  transition: 0.5s;
+  bottom: 20px;
+  left: 350px;
 
-  & > button {
-    margin: 0 auto;
-    // background:white;
-    border: none;
-    cursor: pointer;
+  &:hover {
+    max-height: 1000px;
+    background-color: #7ab800;
+    transition: all 2s 0.5s;
   }
-
-  & > * {
-    display: block;
-    margin: 3rem auto;
-    background: white;
-    border: none;
+  & > button {
+    background-color: white;
   }
 
   & > input {
     cursor: pointer;
   }
+
+  @media (max-width: 768px) {
+    max-height: 25px;
+  }
 `;
 
 export const Info = styled.p`
-
-    padding: 1.5rem;
-    font-size 1.5rem;
-    background-color:${(props) => props.theme.main.color};
-    color:white;
-`;
-
-export const Img = styled.img`
-  margin: 0;
-  width: 60px;
-  height: 35px;
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  cursor: pointer;
-  // border-top-right-radius: 5rem;
-  // border-bottom-right-radius: 5rem;
-  border-radius: 5rem;
-  // transform:rotate(90deg);
-  background-color: ${(props) => props.theme.main.color};
-  z-index: 999;
+  padding: 1.5rem;
+  font-size 1.5rem;
+  color:white;
+  width: 18rem;
 `;

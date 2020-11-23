@@ -12,6 +12,7 @@ const ul = styled.ul`
   position: absolute;
   bottom: 20px;
   left: 0px;
+
   & > li {
     background-color: white;
   }
@@ -20,6 +21,10 @@ const ul = styled.ul`
     max-height: 1000px;
     background-color: #7ab800;
     transition: all 2s 0.5s;
+  }
+
+  @media (max-width: 768px) {
+    max-height: 25px;
   }
 `;
 
