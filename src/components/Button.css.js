@@ -7,8 +7,8 @@ const Buttons = styled.button`
   padding: 0.5rem 0.7rem;
   margin: 0.2rem;
   border: 0.1rem solid black;
-  border-radius: 0.2rem;
-  width: 18rem;
+  // border-radius: 0.2rem;
+  width: ${(props) => props.theme.main.buttonWidth}px;
   text-align: left;
   transition: 0.4s;
 

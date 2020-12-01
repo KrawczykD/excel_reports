@@ -4,6 +4,7 @@ import displayDataReducer from "./displayDataReducer";
 import changeWarningStateReducer from "./changeWarningStateReducer";
 import addWeekNumberReducer from "./addWeekNumberReducer";
 import loadedCustomersReducer from "./loadedCustomersReducer";
+import spinerReducer from "./spinerReducer";
 
 const rootReducer = combineReducers({
   addExcelFile,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   changeWarningStateReducer,
   addWeekNumberReducer,
   loadedCustomersReducer,
+  spinerReducer,
 });
 
 export default rootReducer;

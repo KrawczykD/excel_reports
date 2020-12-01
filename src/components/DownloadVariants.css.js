@@ -8,17 +8,19 @@ const ul = styled.ul`
   transition: all 2s 0.5s;
   list-style: none;
   margin: 0;
+  padding: 0px;
 
   position: absolute;
   bottom: 20px;
   left: 0px;
 
-  & > li {
+  & > li > button {
     background-color: white;
   }
 
   &:hover {
     max-height: 1000px;
+
     background-color: #7ab800;
     transition: all 2s 0.5s;
   }

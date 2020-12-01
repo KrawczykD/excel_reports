@@ -6,11 +6,12 @@ import Button from "./DownloadExcelButton";
 import TableButton from "./Button.css";
 import ExcelDownloadSeparateButton from "./ExcelDownloadSeparateButton";
 import currentWeek from "current-week-number";
-import { DateInput as Input } from "./Input.css";
+import { DateInput as Input } from "./MacroDownload.css";
 import DownloadVariants from "./DownloadVariants.css";
 import FunctionButtons from "./FunctionButtons.css";
 import MacroDownload from "./MacroDownload";
 import Popup from "./Popup.js";
+import spinerToggle from "../actions/spinerAction";
 
 let databaseData;
 let inputDate;
@@ -31,7 +32,7 @@ let buttonsVariants = [
   { name: "CUST STOCKPORT OTIF", report: null, customer: "CUST_STK" },
 ];
 
-const dbRequest = async (date) => {
+const dbRequest = async (date, spiner) => {
   let searchDate = `${currentWeek(date)}-${
     inputDate ? inputDate.slice(6, 10) : new Date().getFullYear()
   }`;
@@ -65,7 +66,7 @@ dbRequest();
 
 //here you can controll what field display
 
-const DisplayList = ({ OTIF, OPEN }) => {
+const DisplayList = ({ OTIF, OPEN, spinerToggle }) => {
   const preferredOrderSetup = [
     // 1st Commit - Late Category
     // Billed Quantity
@@ -175,7 +176,7 @@ const DisplayList = ({ OTIF, OPEN }) => {
       tables.push(table);
       table = [];
     }
-
+    spinerToggle(false);
     return { headers, tables };
   };
 
@@ -199,7 +200,7 @@ const DisplayList = ({ OTIF, OPEN }) => {
       tables.push(table);
       table = [];
     }
-
+    spinerToggle(false);
     return { headers, tables };
   };
 
@@ -218,12 +219,14 @@ const DisplayList = ({ OTIF, OPEN }) => {
       }
       count = 0;
     }
+
     return myArr;
   };
 
   const duplicateRemove = (A, B) => {
     var myArr = A.concat(B);
     var count = 0;
+
     for (let i = 0; i < myArr.length; i++) {
       for (let j = 0; j < myArr.length; j++) {
         if (myArr[j]["SO + Line"] === myArr[i]["SO + Line"]) {
@@ -254,7 +257,7 @@ const DisplayList = ({ OTIF, OPEN }) => {
   const AxiosRequest = (file) => {
     file.map((item) => {
       fetch(`${process.env.REACT_APP_SERVER}/reports`, {
-        method: "POST", // or 'PUT'
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -274,8 +277,9 @@ const DisplayList = ({ OTIF, OPEN }) => {
   };
 
   return (
-    <div>
+    <div className="tour-0">
       <TableButton
+        className="tour-6"
         onClick={() =>
           setCount(
             (visibletable = 1),
@@ -321,6 +325,7 @@ const DisplayList = ({ OTIF, OPEN }) => {
         Display OPEN + OTIF
       </TableButton>
       <TableButton
+        className="tour-10"
         onClick={async () => (
           await dbRequest(inputDate),
           await setCount(
@@ -345,11 +350,14 @@ const DisplayList = ({ OTIF, OPEN }) => {
           onChange={(node) => (inputDate = dateStringify(node))}
         />
       ) : null}
-      {/* ///////////"09/27/2020" */}
       {visibletable !== 4 ? (
         <TableButton
+          className="tour-8"
           onClick={() => {
-            toggleDuplicateRemove((toggleDuplicate = !toggleDuplicate));
+            spinerToggle(true);
+            setTimeout(() => {
+              toggleDuplicateRemove((toggleDuplicate = !toggleDuplicate));
+            }, 100);
           }}
         >
           {toggleDuplicate ? "Duplicates Removed" : "Duplicates Added"}
@@ -401,7 +409,7 @@ const DisplayList = ({ OTIF, OPEN }) => {
       ) : null}
       {visibletable === 3 ? (
         <Table left={useStyle3}>
-          <caption>
+          <caption className="tour-7">
             <p>
               {toggleDuplicate
                 ? "OPEN + OTIF Duplicates Removed"
@@ -476,6 +484,7 @@ const DisplayList = ({ OTIF, OPEN }) => {
         <>
           <FunctionButtons>
             <TableButton
+              className="tour-9"
               onClick={() => {
                 AxiosRequest(
                   toggleDuplicate
@@ -493,7 +502,7 @@ const DisplayList = ({ OTIF, OPEN }) => {
             <ReportValidationFunction></ReportValidationFunction>
           </FunctionButtons>
 
-          <DownloadVariants>
+          <DownloadVariants className="tour-11">
             {buttonsVariants.map((variant) => (
               <li>
                 <ExcelDownloadSeparateButton
@@ -526,4 +535,8 @@ const mapStateToProps = (state) => ({
   OPEN: state.displayDataReducer[1],
 });
 
-export default connect(mapStateToProps)(DisplayList);
+const mapDispatchToProps = (dispatch) => ({
+  spinerToggle: (toggle) => dispatch(spinerToggle(toggle)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayList);

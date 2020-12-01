@@ -10,7 +10,7 @@ export const Div = styled.div`
 
   position: absolute;
   bottom: 20px;
-  left: 350px;
+  left: ${(props) => props.theme.main.buttonWidth * 1 + 6}px;
 
   &:hover {
     max-height: 1000px;
@@ -34,5 +34,13 @@ export const Info = styled.p`
   padding: 1.5rem;
   font-size 1.5rem;
   color:white;
-  width: 18rem;
+  width: 14rem;
+`;
+
+export const DateInput = styled.input`
+  font-size: 1.2rem;
+  border: 1px solid black;
+  padding: 0.35rem 0.7rem;
+  margin: 0.2rem;
+  border-radius: 3px;
 `;

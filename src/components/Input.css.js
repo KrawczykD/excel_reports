@@ -5,24 +5,21 @@ export const Input = styled.input`
 `;
 
 export const Label = styled.label`
+  display: inline-block;
   font-size: 1.2rem;
-  border: 1px solid black;
-  display: inline;
+  background-color: Transparent;
   cursor: pointer;
   padding: 0.5rem 0.7rem;
   margin: 0.2rem;
-  border-radius: 2px;
-  background: ${(props) => props.color};
+
+  border-radius: 0.2rem;
+  width: ${(props) => props.theme.main.buttonWidth}px;
+  text-align: left;
+  transition: 0.4s;
+
+  border: 0.1rem solid black;
 
   :hover {
     color: gray;
   }
-`;
-
-export const DateInput = styled.input`
-  font-size: 1.2rem;
-  border: 1px solid black;
-  padding: 0.35rem 0.7rem;
-  margin: 0.2rem;
-  border-radius: 3px;
 `;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "./Button.css";
-import { DateInput as Input } from "./Input.css";
+import { DateInput as Input } from "./MacroDownload.css";
 import { Div, Info, Img } from "./MacroDownload.css";
 import { connect } from "react-redux";
 import addWeekNumber from "../actions/addWeekNumberAction";
@@ -8,7 +8,6 @@ import currentWeekNumber from "current-week-number";
 import ButtonHead from "./DownloadExcelButton";
 
 const Macro = (props) => {
-  // let path = `"C:\\reports\\${currentWeekNumber()}"`
   let path = `"C:\\reports"`;
 
   const vbs = (startDate, endDate) => {
@@ -352,9 +351,11 @@ session.findById("wnd[0]/tbar[0]/btn[3]").press
     return `"${month}/${day}/${year}"`;
   };
 
+  props.addWeekNumber(`${currentWeekNumber()}-${new Date().getUTCFullYear()}`);
+
   return (
     <>
-      <Div>
+      <Div className="tour-1">
         <ButtonHead buttonName="SAP"></ButtonHead>
         <Input
           type="date"

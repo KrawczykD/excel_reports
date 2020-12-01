@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 const Table = styled.table`
   display: block;
-  height: 70vh;
-  // max-height:25vh;
+  height: 80vh;
   overflow: scroll;
   border: 0.2rem solid black;
   position: relative;

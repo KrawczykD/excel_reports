@@ -7,12 +7,8 @@ import addCustomer from "../actions/loadedCustomersActions";
 import { Input, Label } from "./Input.css.js";
 import Select from "./Select.css.js";
 import ExcelLoadDiv from "./ExcelLoad.css";
-import spinerToggle from "../actions/spinerAction";
 
 import logo from "../assets/images/landisgyr_logo.png";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfo } from "@fortawesome/free-solid-svg-icons";
 
 const SheetJSFT = [
   "xlsx",
@@ -54,7 +50,7 @@ class ExcelLoad extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: [],
+      file: {},
       data: [],
       cols: [],
       report: null,
@@ -74,16 +70,11 @@ class ExcelLoad extends Component {
 
   handleChange(e) {
     const files = e.target.files;
-
-    let newFiles = [];
-
-    for (let i = 0; i < files.length; i++) {
-      newFiles.push(files[i]);
-    }
-    if (files && files[0]) this.setState({ file: newFiles }); // files[0]
+    console.log(files);
+    if (files && files[0]) this.setState({ file: files[0] });
   }
 
-  handleFile(file, customer, report) {
+  handleFile() {
     /* Boilerplate to set up FileReader */
     const reader = new FileReader();
     const rABS = !!reader.readAsBinaryString;
@@ -102,8 +93,8 @@ class ExcelLoad extends Component {
       const data = XLSX.utils.sheet_to_json(ws);
       // add customer and report type
 
-      data.map((item) => (item["Report Customer"] = customer));
-      data.map((item) => (item.report = report));
+      data.map((item) => (item["Report Customer"] = this.state.customer));
+      data.map((item) => (item.report = this.state.report));
       /*Add to object report type and customer*/
       // data.unshift(this.state.report);
       /* Update state */
@@ -111,12 +102,20 @@ class ExcelLoad extends Component {
         // console.log(JSON.stringify(this.state.data, null, 2));
         this.props.addFile(this.state.data);
       });
+
+      this.setState({
+        customer: null,
+        report: null,
+      });
+
+      document.getElementById("report").value = "";
+      document.getElementById("customer").value = "";
     };
 
     if (rABS) {
-      reader.readAsBinaryString(file);
+      reader.readAsBinaryString(this.state.file);
     } else {
-      reader.readAsArrayBuffer(file);
+      reader.readAsArrayBuffer(this.state.file);
     }
   }
 
@@ -134,26 +133,31 @@ class ExcelLoad extends Component {
   };
 
   checkReport = () => {
-    for (let i = 0; i < this.state.file.length; i++) {
-      if (this.state.file[i].name.length === 13) {
-        let customer = this.state.file[i].name.slice(0, 3);
-        let report = this.state.file[i].name.slice(4, 8);
-        this.handleFile(this.state.file[i], customer, report);
+    if (this.state.file.name !== undefined) {
+      if (
+        this.state.file.name.slice(0, 8) ===
+          `${this.state.customer}_${this.state.report}` ||
+        this.state.file.name.slice(0, 13) ===
+          `${this.state.customer}_${this.state.report}`
+      ) {
+        this.props.changeWarningState(false);
+        this.props.addCustomer(`${this.state.customer} ${this.state.report}`);
+        this.setState({
+          loadedCustomer: [
+            ...this.state.loadedCustomer,
+            `${this.state.customer} ${this.state.report} `,
+          ],
+        });
 
-        this.props.addCustomer(`${customer} ${report}`);
-      } else if (this.state.file[i].name.length === 18) {
-        let customer = this.state.file[i].name.slice(0, 8);
-        let report = this.state.file[i].name.slice(9, 13);
-        this.handleFile(this.state.file[i], customer, report);
-
-        this.props.addCustomer(`${customer} ${report}`);
+        return this.handleFile();
       } else {
         this.props.changeWarningState(true);
         return null;
       }
+    } else {
+      this.props.changeWarningState(true);
+      return null;
     }
-
-    this.props.changeWarningState(false);
   };
 
   render() {
@@ -167,46 +171,13 @@ class ExcelLoad extends Component {
             alt="Landis and Gyr logo"
             src={logo}
             width="100px"
-            // style={{ position: "absolute", top: "0", right: "0" }}
-            style={{ float: "right" }}
+            style={{ position: "absolute", top: "0", right: "0" }}
           ></img>
         </a>
-        <FontAwesomeIcon
-          onClick={() => {
-            this.props.toggleTour(true);
-          }}
-          style={{
-            float: "right",
-            width: "20px",
-            height: "20px",
-            marginTop: "25px",
-            padding: "10px",
-            border: "1px solid black",
-            borderRadius: "50px",
-            cursor: "pointer",
-          }}
-          icon={faInfo}
-        />
-        {/* <button
-          style={{
-            float: "right",
-            marginTop: "40px",
-            background: "#7ab800",
-            border: "none",
-          }}
-          onClick={() => {
-            this.props.toggleTour(true);
-          }}
-        >
-          Tour
-        </button> */}
         <br></br>
 
-        <Label htmlFor="file" className="tour-2">
-          Upload an excel files
-        </Label>
+        <Label htmlFor="file">Upload an excel files</Label>
         <Input
-          multiple="multiple"
           type="file"
           className="form-control"
           id="file"
@@ -214,8 +185,28 @@ class ExcelLoad extends Component {
           onChange={this.handleChange}
         />
 
-        <Label color={this.state.success} htmlFor="submit" className="tour-3">
-          Load Files
+        <Select name="report" id="report" onChange={this.handleReportChange}>
+          <option value=""></option>
+          <option value="OPEN">OPEN</option>
+          <option value="OTIF">OTIF</option>
+        </Select>
+
+        <Select
+          name="customer"
+          id="customer"
+          onChange={this.handleReportChange}
+        >
+          <option value=""></option>
+          <option value="CLS">CLS</option>
+          <option value="JBL">JBL</option>
+          <option value="STK">STK</option>
+          <option value="CUST_CLS">CUST_CLS</option>
+          <option value="CUST_JBL">CUST_JBL</option>
+          <option value="CUST_STK">CUST_STK</option>
+        </Select>
+
+        <Label color={this.state.success} htmlFor="submit">
+          Load File
         </Label>
         <Input
           className="LoadFile"
@@ -235,7 +226,6 @@ const mapDispatchToProps = (dispatch) => ({
   addFile: (data) => dispatch(addFile(data)),
   changeWarningState: (state) => dispatch(changeWarningState(state)),
   addCustomer: (state) => dispatch(addCustomer(state)),
-  spinerToggle: (toggle) => dispatch(spinerToggle(toggle)),
 });
 
 export default connect(null, mapDispatchToProps)(ExcelLoad);

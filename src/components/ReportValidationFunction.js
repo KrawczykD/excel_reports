@@ -3,7 +3,15 @@ import { connect } from "react-redux";
 import addData from "../actions/addDataAction";
 import addWeekNumber from "../actions/addWeekNumberAction";
 import Buttons from "./Button.css";
-const functionChange = (files, addData, addWeekNumberReducer) => {
+import spinerToggle from "../actions/spinerAction";
+
+const functionChange = (
+  files,
+  addData,
+  addWeekNumberReducer,
+  addWeekNumber,
+  spinerToggle
+) => {
   let OTIF = [];
   let OPEN = [];
 
@@ -143,13 +151,23 @@ const reportValidationFunction = ({
   addData,
   addWeekNumberReducer,
   addWeekNumber,
+  spinerToggle,
 }) => {
   return (
     <>
       <Buttons
-        // style={{ position: "absolute", bottom: "20px", right: "0" }}
+        className="tour-5"
         onClick={() => {
-          functionChange(files, addData, addWeekNumberReducer, addWeekNumber);
+          spinerToggle(true);
+          setTimeout(() => {
+            functionChange(
+              files,
+              addData,
+              addWeekNumberReducer,
+              addWeekNumber,
+              spinerToggle
+            );
+          }, 100);
         }}
       >
         Generate report
@@ -166,6 +184,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   addData: (OTIF, OPEN) => dispatch(addData(OTIF, OPEN)),
   addWeekNumber: (currentWeek) => dispatch(addWeekNumber(currentWeek)),
+  spinerToggle: (toggle) => dispatch(spinerToggle(toggle)),
 });
 
 export default connect(

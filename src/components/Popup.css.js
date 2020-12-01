@@ -10,7 +10,7 @@ export const PopupDiv = styled.div`
 
   position: absolute;
   bottom: 20px;
-  left: 665px;
+  left: ${(props) => props.theme.main.buttonWidth * 2 + 12}px;
 
   &:hover {
     max-height: 1000px;
